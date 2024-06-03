@@ -1,0 +1,5 @@
+# large-files-folder #
+large-files
+
+# OS generated files #
+.DS_Store
