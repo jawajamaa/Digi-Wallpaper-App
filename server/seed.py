@@ -15,3 +15,9 @@ if __name__ == '__main__':
     with app.app_context():
         print("Starting seed...")
         # Seed code goes here!
+
+# seed users with faker (maybe 20?)
+
+# seed mobile wallpaper (maybe also 20, leaving 3 to add later?)
+
+# seed desktop wallpaper (maybe 30, leaving 6 to add later?)
