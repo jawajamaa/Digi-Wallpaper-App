@@ -13,15 +13,6 @@ from config import app, db, api
 # Add your model imports
 from models import User, MobileWallpaper, DesktopWallpaper
 
-# app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# app.json.compact = False
-
-# CORS(app)
-# migrate = Migrate(app,db)
-
-# db.init_app(app)
 
 # Views go here!
 
@@ -35,11 +26,10 @@ def home():
 def mobilepapers():
     if request.method == 'GET':
         mobilepapers = MobileWallpaper.query.all()
-
         print("line 36 app.py", mobilepapers)
 
         return make_response(
-            jsonify([mobileP.to_dict() for mobileP in mobilepapers], 200 )
+            jsonify([mobileP.to_dict() for mobileP in mobilepapers]), 200
         )
     else:
         return make_response(
