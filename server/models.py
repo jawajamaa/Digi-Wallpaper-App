@@ -11,6 +11,11 @@ class User():
 class MobileWallpaper():
     pass
 
-
+# 
 class DesktopWallpaper():
+    pass
+
+# association table
+# attributes - id, name, rating, comment, mobileWallpapers_id(fk), desktopWallpapers_id(fk), user_id(fk)
+class Comments():
     pass
