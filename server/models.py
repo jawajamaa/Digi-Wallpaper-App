@@ -3,19 +3,64 @@ from sqlalchemy.ext.associationproxy import association_proxy
 
 from config import db
 
+# metadata = MetaData(naming_convention ={
+#     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+# })
+
+# db = SQLAlchemy(metadata=metadata)
+
 # user class with attributes
-class User():
-    pass
+class User(db.Model, SerializerMixin):
+    __tablename__ = 'users'
 
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    username = db.Column(db.String)
+    email = db.Column(db.String)
 
-class MobileWallpaper():
-    pass
+    def __repr__(self):
+        return f'User {self.id}, {self.name} username: {self.username} email: {self.email}'
 
+class MobileWallpaper(db.Model, SerializerMixin):
+    __tablename__ = 'mobilewallpapers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    location = db.Column(db.String)
+    year = db.Column(db.Integer)
+    path = db.Column(db.String)
+
+    user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f'Mobile Wallpaper {self.id}, Titled: {self.title} taken in {self.location} in {self.year} and the path to the image is: {self.path}'
 # 
-class DesktopWallpaper():
-    pass
+class DesktopWallpaper(db.Model, SerializerMixin):
+    __tablename__ = 'desktopwallpapers'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    location = db.Column(db.String)
+    year = db.Column(db.Integer)
+    path = db.Column(db.String)
+
+    user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f'Desktop Wallpaper {self.id}, Titled: {self.title} taken in {self.location} in {self.year} and the path to the image is: {self.path}'
 
 # association table
-# attributes - id, name, rating, comment, mobileWallpapers_id(fk), desktopWallpapers_id(fk), user_id(fk)
-class Comments():
-    pass
+# attributes - id, name, rating, comment, mobileWallpapers_id(fk), desktopWallpapers_id(fk), user_id(fk) - FKs not in repr yet - should be?
+class Comment(db.Model, SerializerMixin):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    rating = db.Column(db.Float)
+    comment = db.Column(db.String)
+
+    mobilewallpapers_id = db.Column(db.Integer, db.ForeignKey('mobilewallpapers.id'))
+    desktopwallpapers_id = db.Column(db.Integer, db.ForeignKey('desktopwallpapers.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self): f'Comment {self.id} by {self.name} with a rating of {self.rating} out of 5 and the comment {self.comment}'
