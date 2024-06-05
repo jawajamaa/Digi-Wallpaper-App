@@ -12,6 +12,7 @@ import '@fontsource/roboto/700.css';
 
 import { MobileWallContext, DesktopWallContext } from "../AppContext";
 import MobileWall from "./MobileWall";
+import NavBar from "./NavBar";
 
 const baseUrl = "http://127.0.0.1:5555"
 const mobileRoute = "/mobilepapers"
@@ -62,7 +63,10 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Container>
         <header>
-          {/* <NavBar /> */}
+          <NavBar
+            toggleDarkMode = { toggleDarkMode }
+            toggleDarkTheme = { toggleDarkTheme }
+           />
         </header>
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
