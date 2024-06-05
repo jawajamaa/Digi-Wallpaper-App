@@ -9,11 +9,37 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import DesktopCard from "./DesktopCard";
 
+import { MobileWallContext, DesktopWallContext } from "../AppContext";
+import MobileWall from "./MobileWall";
+
+const baseUrl = "http://127.0.0.1:5555"
+const mobileRoute = "/mobilepapers"
+const desktopRoute = "/desktoppapers"
 
 function App() {
   const[toggleDarkMode, setToggleDarkMode] = useState(true);
+  const[mobileWallState, setMobileWallState] = useState([])
+  const[desktopWallState, setDesktopWallState] = useState([])
+  const[randomDesktop, setRandomDesktop] = useState(null)
+
+  // fetch MobileWallpapers (vertical)
+  useEffect(() => {
+    fetch(baseUrl + mobileRoute)
+      .then(r => r.json())
+      .then(data => {
+        setMobileWallState(data)
+      });
+  }, [])
+  
+  // fetch DesktopWallpapers (horizontal)
+  useEffect(() => {
+    fetch(baseUrl + desktopRoute)
+      .then(r => r.json())
+      .then(data => {
+        setDesktopWallState(data)
+      });
+  }, [])
 
   const toggleDarkTheme = () => {
     setToggleDarkMode(!toggleDarkMode);
@@ -35,7 +61,18 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <Container>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <header>
+          {/* <NavBar /> */}
+        </header>
+        <main>
+          <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
+          <Grid container spacing={7}>
+            <MobileWall />
+          </Grid>
+          <CssBaseline />
+          </MobileWallContext.Provider>
+        </main>
+        {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <h1>Project Client</h1>
         <h2>Toggle Dark Mode</h2>
         <Switch checked={toggleDarkMode} onChange={toggleDarkTheme} />
@@ -60,11 +97,11 @@ function App() {
             </Typography>
           </CardContent>
         </Card>
-        </div>
-        <Grid container spacing={7}>
-          <DesktopCard />
+        </div> */}
+        {/* <Grid container spacing={7}>
+          <MobileWall />
         </Grid>
-        <CssBaseline />
+        <CssBaseline /> */}
       </Container>
     </ThemeProvider>
   )
