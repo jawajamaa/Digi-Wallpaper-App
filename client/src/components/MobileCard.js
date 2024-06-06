@@ -1,9 +1,32 @@
-import { Grid, Paper } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+ 
 
-function MobileCard() {
+function MobileCard({ mobilepaper }) {
+    const{
+        id,
+        title,
+        location,
+        year,
+        path,
+        user_id
+    } = mobilepaper;
+
     return(
-        <Grid item xs={3}>
-            <Paper elevation={3}>Hello World</Paper>
+        <Grid item xs={4}>
+            <Box
+                sx={{p:5}}>
+                <Paper elevation={3} square >
+                    <img 
+                        src= { path } 
+                        alt= { title } 
+                        width = "150px"
+                    />
+                    <h4>{ title }</h4>
+                    <h5>{ location }</h5><h6>{ year }</h6>
+                </Paper>
+            </Box>
         </Grid>
     );
 };
