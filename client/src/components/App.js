@@ -12,7 +12,8 @@ import '@fontsource/roboto/700.css';
 
 import { MobileWallContext, DesktopWallContext } from "../AppContext";
 import MobileWall from "./MobileWall";
-import NavBar from "./NavBar";
+import DesktopWall from "./DesktopWall";
+// import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 
 const baseUrl = "http://127.0.0.1:5555"
@@ -79,42 +80,13 @@ function App() {
         </header>
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
-          <Grid container spacing={7}>
+          <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
             <MobileWall />
-          </Grid>
+            <DesktopWall />
           <CssBaseline />
+          </DesktopWallContext.Provider>
           </MobileWallContext.Provider>
         </main>
-        {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h1>Project Client</h1>
-        <h2>Toggle Dark Mode</h2>
-        <Switch checked={toggleDarkMode} onChange={toggleDarkTheme} />
-        <Card sx={{ width: "30%", borderRadius: 3, padding: 1 }}>
-          <CardContent>
-            <CardMedia 
-              sx={{ height: 180, borderRadius: 3 }}>
-              <img 
-                src="/images/h3000pxLongEdge/un_9hrz_1_2.jpg"  
-                alt="Manhattan as seen from L.I.C"
-                width="300" 
-              />
-              </CardMedia>
-            <Typography variant="h4" component="div" sx={{ marginTop: 3 }}>
-              Some Title
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color = "text.secondary">
-              Some sub-Title
-            </Typography>
-            <Typography variant="body1">
-              This is the body of the page.
-            </Typography>
-          </CardContent>
-        </Card>
-        </div> */}
-        {/* <Grid container spacing={7}>
-          <MobileWall />
-        </Grid>
-        <CssBaseline /> */}
       </Container>
     </ThemeProvider>
   )

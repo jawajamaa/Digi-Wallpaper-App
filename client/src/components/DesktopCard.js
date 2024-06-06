@@ -1,10 +1,23 @@
-import { Grid, Paper } from "@mui/material";
+import { ImageListItem } from "@mui/material";
 
-function DesktopCard() {
+
+function DesktopCard({ desktoppaper }) {
+    const{
+        id,
+        title,
+        location,
+        year,
+        path,
+        user_id
+    } = desktoppaper;
+
     return(
-        <Grid item xs={3}>
-            <Paper elevation={3}>Hello World</Paper>
-        </Grid>
+        <ImageListItem key = {id}>
+            <img 
+                src= { path } 
+                alt= { title } 
+            />
+        </ImageListItem>
     );
 };
 
