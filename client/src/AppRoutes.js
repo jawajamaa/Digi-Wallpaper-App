@@ -12,15 +12,15 @@ const routes = [
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/MobileWall",
+                path: "/mobilewall",
                 element: <MobileWall />
             },
             {
-                path: "/DesktopWall",
+                path: "/desktopwall",
                 element: <DesktopWall />
             },
             {
-                path: "/AddWallpaper",
+                path: "/addwallpaper",
                 element: <AddWallpaper />
             }
         ]

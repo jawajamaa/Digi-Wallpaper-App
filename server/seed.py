@@ -224,7 +224,7 @@ def seed_data():
         title = "Seattle 054",
         location = "Seattle, WA, USA",
         year = 2012,
-        path = "/images/v3000pxLongEdge/20120719_Seattle_054.jpg",
+        path = "/images/h3000pxLongEdge/20120719_Seattle_054.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW1)
@@ -233,7 +233,7 @@ def seed_data():
         title = "Orchard off i5 003",
         location = "Central CA, USA",
         year = 2013,
-        path = "/images/v3000pxLongEdge/20130307_i5_003.jpg",
+        path = "/images/h3000pxLongEdge/20130307_i5_003.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW2)
@@ -242,7 +242,7 @@ def seed_data():
         title = "Dune du Pilat 692",
         location = "Dune du Pilat, France",
         year = 2014,
-        path = "/images/v3000pxLongEdge/20140920_Dune_du_Pilat_692.jpg",
+        path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_692.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW3)
@@ -251,7 +251,7 @@ def seed_data():
         title = "Dune du Pilat 677",
         location = "Dune du Pilat, France",
         year = 2014,
-        path = "/images/v3000pxLongEdge/20140920_Dune_du_Pilat_677",
+        path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_677",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW4)
@@ -260,7 +260,7 @@ def seed_data():
         title = "Windmills 63",
         location = "Palm Springs, CA, USA",
         year = 2009,
-        path = "/images/v3000pxLongEdge/windmills_063.jpg",
+        path = "/images/h3000pxLongEdge/windmills_063.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW5)
@@ -269,7 +269,7 @@ def seed_data():
         title = "Midtown Manhattan from L.I.C",
         location = "Queens, NY, USA",
         year = 2006,
-        path = "/images/v3000pxLongEdge/un_9hrz_1_2.jpg",
+        path = "/images/h3000pxLongEdge/un_9hrz_1_2.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW6)
@@ -278,7 +278,7 @@ def seed_data():
         title = "Seattle Space Needle 003",
         location = "Seattle, WA, USA",
         year = 2009,
-        path = "/images/v3000pxLongEdge/Seattle_003.jpg",
+        path = "/images/h3000pxLongEdge/Seattle_003.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW7)
@@ -287,7 +287,7 @@ def seed_data():
         title = "Meilen 029",
         location = "Meilen, Switzerland",
         year = 2011,
-        path = "/images/v3000pxLongEdge/Meilen_029.jpg",
+        path = "/images/h3000pxLongEdge/Meilen_029.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW8)
@@ -296,7 +296,7 @@ def seed_data():
         title = "Meilen 038",
         location = "Meilen, Switzerland",
         year = 2011,
-        path = "/images/v3000pxLongEdge/Meilen_038.jpg",
+        path = "/images/h3000pxLongEdge/Meilen_038.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW9)
@@ -305,7 +305,7 @@ def seed_data():
         title = "macau_105",
         location = "Macau, SAR of PRC",
         year = 2008,
-        path = "/images/v3000pxLongEdge/macau_105.jpg",
+        path = "/images/h3000pxLongEdge/macau_105.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW10)
@@ -314,7 +314,7 @@ def seed_data():
         title = "macau_127",
         location = "Macau, SAR of PRC",
         year = 2008,
-        path = "/images/v3000pxLongEdge/macau_127.jpg",
+        path = "/images/h3000pxLongEdge/macau_127.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW11)
@@ -323,7 +323,7 @@ def seed_data():
         title = "macau_130",
         location = "Macau, SAR of PRC",
         year = 2006,
-        path = "/images/v3000pxLongEdge/macau_130.jpg",
+        path = "/images/h3000pxLongEdge/macau_130.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW12)
@@ -332,7 +332,7 @@ def seed_data():
         title = "hk 319",
         location = "Lantau Island, HK, SAR of PRC",
         year = 2008,
-        path = "/images/v3000pxLongEdge/hk_319.jpg",
+        path = "/images/h3000pxLongEdge/hk_319.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW13)
@@ -341,7 +341,7 @@ def seed_data():
         title = "Golden_Circle_339_OG",
         location = "Iceland",
         year = 2014,
-        path = "/images/v3000pxLongEdge/Golden_Circle_339_OG.jpg",
+        path = "/images/h3000pxLongEdge/Golden_Circle_339_OG.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW14)
@@ -350,7 +350,7 @@ def seed_data():
         title = "Camel_Safari_350",
         location = "Rajasthan, India",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Camel_Safari_350.jpg",
+        path = "/images/h3000pxLongEdge/Camel_Safari_350.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW15)
@@ -359,7 +359,7 @@ def seed_data():
         title = "Oregon_Coast_032",
         location = "Oregon Coast, USA",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Oregon_Coast_032.jpg",
+        path = "/images/h3000pxLongEdge/Oregon_Coast_032.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW16)
@@ -368,7 +368,7 @@ def seed_data():
         title = "Rheinfall_087",
         location = "Switzerland",
         year = 2011,
-        path = "/images/v3000pxLongEdge/Rheinfall_087.jpg",
+        path = "/images/h3000pxLongEdge/Rheinfall_087.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW17)
@@ -377,7 +377,7 @@ def seed_data():
         title = "Agra_275",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Agra_275.jpg",
+        path = "/images/h3000pxLongEdge/Agra_275.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW18)
@@ -386,7 +386,7 @@ def seed_data():
         title = "Agra_213",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Agra_213.jpg",
+        path = "/images/h3000pxLongEdge/Agra_213.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW19)
@@ -395,7 +395,7 @@ def seed_data():
         title = "Oregon_Coast_151",
         location = "OR, USA",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Oregon_Coast_151.jpg",
+        path = "/images/h3000pxLongEdge/Oregon_Coast_151.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW20)
@@ -404,7 +404,7 @@ def seed_data():
         title = "lndneye1-1",
         location = "London, UK",
         year = 2005,
-        path = "/images/v3000pxLongEdge/lndneye1-1.jpg",
+        path = "/images/h3000pxLongEdge/lndneye1-1.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW21)
@@ -413,7 +413,7 @@ def seed_data():
         title = "lib2.1",
         location = "Rochester, NY, USA",
         year = 2008,
-        path = "/images/v3000pxLongEdge/lib2-1.jpg",
+        path = "/images/h3000pxLongEdge/lib2-1.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW22)
@@ -422,7 +422,7 @@ def seed_data():
         title = "Boise_154",
         location = "Boise, ID, USA",
         year = 2009,
-        path = "/images/v3000pxLongEdgeBoise_154.jpg",
+        path = "/images/h3000pxLongEdgeBoise_154.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW23)
@@ -431,7 +431,7 @@ def seed_data():
         title = "Oregon Coast 017",
         location = "OR, USA",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Oregon_Coast_017.jpg",
+        path = "/images/h3000pxLongEdge/Oregon_Coast_017.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW24)
@@ -440,7 +440,7 @@ def seed_data():
         title = "Dune du Pilat 688",
         location = "Dune du Pilat, France",
         year = 2014,
-        path = "/images/v3000pxLongEdge/20140920_Dune_du_Pilat_668.jpg",
+        path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_668.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW25)

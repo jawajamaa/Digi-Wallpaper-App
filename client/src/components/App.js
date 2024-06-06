@@ -80,12 +80,12 @@ function App() {
         </header>
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
-          <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
             <MobileWall />
-            <DesktopWall />
-          <CssBaseline />
-          </DesktopWallContext.Provider>
           </MobileWallContext.Provider>
+          <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
+            <DesktopWall />
+          </DesktopWallContext.Provider>
+          <CssBaseline />
         </main>
       </Container>
     </ThemeProvider>
