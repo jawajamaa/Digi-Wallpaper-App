@@ -26,7 +26,6 @@ def home():
 def mobilepapers():
     if request.method == 'GET':
         mobilepapers = MobileWallpaper.query.all()
-        print("line 36 app.py", mobilepapers)
 
         return make_response(
             jsonify([mobileP.to_dict() for mobileP in mobilepapers]), 200
@@ -34,9 +33,27 @@ def mobilepapers():
     else:
         return make_response(
             jsonify({"message": "Method not allowed"}), 405)
+    
 #   1a) Mobile single wallpaper view RESTful conventions /mobilepapers/1 etc.
+
+
 # 2) Desktop view - /desktoppapers
+@app.route('/desktoppapers', methods=['GET'])
+def desktoppapers():
+    if request.method == 'GET':
+        desktoppapers = DesktopWallpaper.query.all()
+
+        return make_response(
+            jsonify([desktopP.to_dict() for desktopP in desktoppapers]), 200
+        )
+    else:
+        return make_response(
+            jsonify({"message": "Method not allowed"}), 405)
+    
 #   2a) Desktop single wallpaper view RESTful conventions /desktoppapers/1 etc
+
+
+
 # 1) Add new wallpaper view - /addwallpapers
 
 if __name__ == '__main__':

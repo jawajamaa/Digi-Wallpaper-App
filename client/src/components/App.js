@@ -13,6 +13,7 @@ import '@fontsource/roboto/700.css';
 import { MobileWallContext, DesktopWallContext } from "../AppContext";
 import MobileWall from "./MobileWall";
 import NavBar from "./NavBar";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 const baseUrl = "http://127.0.0.1:5555"
 const mobileRoute = "/mobilepapers"
@@ -33,6 +34,8 @@ function App() {
       });
   }, [])
   
+  console.log(mobileWallState)
+
   // fetch DesktopWallpapers (horizontal)
   useEffect(() => {
     fetch(baseUrl + desktopRoute)
@@ -42,11 +45,13 @@ function App() {
       });
   }, [])
 
+  console.log(desktopWallState)
+
   const toggleDarkTheme = () => {
     setToggleDarkMode(!toggleDarkMode);
   };
 
-  // applyng the primary and secondary theme colors
+  // applying the primary and secondary theme colors
   const darkTheme = createTheme({
     palette: {
       mode: toggleDarkMode ? 'dark' : 'light',
@@ -63,10 +68,14 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Container>
         <header>
-          <NavBar
+          {/* <NavBar
             toggleDarkMode = { toggleDarkMode }
             toggleDarkTheme = { toggleDarkTheme }
-           />
+           /> */}
+           <ResponsiveAppBar 
+              toggleDarkMode = { toggleDarkMode }
+              toggleDarkTheme = { toggleDarkTheme }
+            />
         </header>
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
