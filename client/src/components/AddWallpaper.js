@@ -1,32 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
-import * as yup from "yup";
+import * as Yup from "yup";
 
+import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext } from "../AppContext";
 
 function AddWallpaper() {
+    const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
+    const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
+    const { serverRoutesState, setServerRoutesState } = useContext(ServerRouteContext);
+    const { refreshState, setRefreshState } = useContext(RefreshContext);
 
-    const formSchema = yup.object().shape({
-        title: yup
-            .string()
-            .title("Invalid title")
+    const {baseUrl,
+        mobileRoute,
+        desktopRoute
+        } = serverRoutesState
+
+    console.log(baseUrl, mobileRoute, desktopRoute)
+    // add image orientation validation?
+    const formSchema = Yup.object().shape({
+        title: Yup.string("Invalid title")
             .required("Image must have a title"),
-        year: yup
-            .number()
+        year: Yup.number()
             .positive()
             .integer()
             .typeError("Please enter a number")
-            .min(4, "Year must 4 digits")
-            .max(4, "Year must 4 digits"),
-        location: yup
-            .string()
-            .location("Please enter the location using letter not numbers")
+            // .min(4, "Year must be 4 digits")
+            // .max(4, "Year must be 4 digits"),
+            .lessThan(2025)
+            .moreThan(1822),
+        location: Yup.string("Please enter the location using letter not numbers")
             .required("Image must have a location, eg, Earth"),
-        url: yup
-            .string()
+        url: Yup.string()
             .url("Image url must be string")
             .required("Image must have a url or a path from which to be loaded"),
-        username: yup
-            .string()
+        username: Yup.string()
             .min(8, "Username must be at least 8 characters")      
     });
 
@@ -40,9 +47,20 @@ function AddWallpaper() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            
-        }
-    })
+            fetch(baseUrl + mobileRoute, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+            }).then(r => {
+                if (r.status === 200) {
+                    setRefreshState(!refreshState); 
+                }
+            });
+        },
+    });
+
 // title, year, location image taken, path or url, username and name?
     return(
         <div>

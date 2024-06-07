@@ -1,49 +1,61 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Route } from "react-router-dom";
 // import { Switch, Route } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Card, CardContent, CardMedia, Container, Grid, Switch, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { MobileWallContext, DesktopWallContext } from "../AppContext";
+import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext } from "../AppContext";
 // import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Outlet } from "react-router-dom";
 
-const baseUrl = "http://127.0.0.1:5555"
-const mobileRoute = "/mobilepapers"
-const desktopRoute = "/desktoppapers"
+const server_routes = {
+  baseUrl : "http://127.0.0.1:5555",
+  mobileRoute : "/mobilepapers",
+  desktopRoute : "/desktoppapers",
+  commentsRoute: "/comments"
+}
+// const baseUrl = "http://127.0.0.1:5555"
+// const mobileRoute = "/mobilepapers"
+// const desktopRoute = "/desktoppapers"
+// const commentsRoute= "/comments"
 
 function App() {
   const[toggleDarkMode, setToggleDarkMode] = useState(true);
-  const[mobileWallState, setMobileWallState] = useState([])
-  const[desktopWallState, setDesktopWallState] = useState([])
-  // const[randomDesktop, setRandomDesktop] = useState(null)
+  const[serverRoutesState, setServerRoutesState] = useState(server_routes);
+  const[mobileWallState, setMobileWallState] = useState([]);
+  const[desktopWallState, setDesktopWallState] = useState([]);
+  const[refreshState, setRefreshState] = useState(false);
+  // const[randomDesktop, setRandomDesktop] = useState(null);
 
+  console.log(server_routes.baseUrl + server_routes.mobileRoute)
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
-    fetch(baseUrl + mobileRoute)
+    fetch(server_routes.baseUrl + server_routes.mobileRoute)
+    // fetch(baseUrl + mobileRoute)
       .then(r => r.json())
       .then(data => {
         setMobileWallState(data)
       });
-  }, [])
+  }, [refreshState])
   
   console.log(mobileWallState)
 
   // fetch DesktopWallpapers (horizontal)
   useEffect(() => {
-    fetch(baseUrl + desktopRoute)
+    fetch(server_routes.baseUrl + server_routes.desktopRoute)
+    // fetch(baseUrl + desktopRoute)
       .then(r => r.json())
       .then(data => {
         setDesktopWallState(data)
       });
-  }, [])
+  }, [refreshState])
 
   console.log(desktopWallState)
 
@@ -80,7 +92,11 @@ function App() {
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
             <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
-              <Outlet />
+              <RefreshContext.Provider value = { {refreshState, setRefreshState} }>
+                <ServerRouteContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
+                  <Outlet />
+                </ServerRouteContext.Provider>
+              </RefreshContext.Provider>
             </DesktopWallContext.Provider>
           </MobileWallContext.Provider>
           <CssBaseline />
