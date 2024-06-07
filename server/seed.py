@@ -21,14 +21,24 @@ def seed_data():
     DesktopWallpaper.query.delete()
     Comment.query.delete()
     
-# seed users with faker (maybe 20?)
+# seed users - names, username, email with faker (20)
     print("Creating users....")
-    users_list = [User(name=fake.name()) for i in range(x)]
-    db.session.add_all(users_list)
+    # line 27 is only good to add names...w/o username or email
+    # users_list = [User(name=fake.name()) for i in range(x)]
     # users_list = []
     # for i in range(20):
-    #     u = User(name=fake.first_name().title())
+    #     u = User(name=fake.name().title())
     #     users_list.append(u)
+    users_list = []
+    for i in range(20):
+        u = User(
+            name=fake.name().title(),
+            username=fake.user_name(),
+            email=fake.email(),
+            )
+        users_list.append(u)
+
+    db.session.add_all(users_list)
 
 # seed mobile wallpaper (maybe also 20, leaving 3 to add later?)
     print("adding Mobile Wallpapers...")
