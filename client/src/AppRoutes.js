@@ -1,4 +1,5 @@
 import App from "./components/App";
+import Home from "./components/Home";
 import ErrorPage from "./components/ErrorPage";
 import DesktopWall from "./components/DesktopWall";
 import MobileWall from "./components/MobileWall";
@@ -11,6 +12,10 @@ const routes = [
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
+            {
+                path: "/",
+                element: <Home />
+            },
             {
                 path: "/mobilewall",
                 element: <MobileWall />

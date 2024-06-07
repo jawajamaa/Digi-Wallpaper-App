@@ -14,7 +14,12 @@ import MenuItem from "@mui/material/MenuItem";
 // import AdbIcon from "@mui/icons-material/Adb";
 import Switch from "@mui/material/Switch";
 
-const pages = ["Home", "Mobile", "Desktop", "Add"];
+const pages = [
+  {name: "Home", url: "/"},
+  {name: "Mobile", url: "/MobileWall"},
+  {name: "Desktop", url: "/DesktopWall"},
+  {name: "Add" ,url: "/AddWallpaper"}
+];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {
@@ -88,9 +93,12 @@ function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(({name, url}) => (
+                <MenuItem key={name} onClick={handleCloseNavMenu}>
+                  <Button
+                    href={url}
+                    sx={{ color: "white", display: "block" }}
+                  >{name}</Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -115,13 +123,13 @@ function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {
             LOGO
           </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map(({name, url}) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={name}
+                href={url}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {name}
               </Button>
             ))}
           </Box>

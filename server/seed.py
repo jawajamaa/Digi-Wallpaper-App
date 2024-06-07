@@ -152,10 +152,10 @@ def seed_data():
     mobileW_list.append(mobileW13)
 
     mobileW14 = MobileWallpaper(
-        title = "Westminster Arches 1.1",
-        location = "Westminster, London, UK",
-        year = 2008,
-        path = "/images/v3000pxLongEdge/westminster_arches1-1.jpg",
+        title = "Golden Circle 296",
+        location = "Iceland",
+        year = 2014,
+        path = "/images/v3000pxLongEdge/Golden_Circle_296.jpg",
         user_id = randint(1, x),
     )
     mobileW_list.append(mobileW14)
@@ -179,7 +179,7 @@ def seed_data():
     mobileW_list.append(mobileW16)
 
     mobileW17 = MobileWallpaper(
-        title = "kuala_lumpur_101_crop_symtcl",
+        title = "Kuala Lumpur 101",
         location = "Kuala Lumpur, Malaysia",
         year = 2008,
         path = "/images/v3000pxLongEdge/kuala_lumpur_101_crop_symtcl.jpg",
@@ -251,7 +251,7 @@ def seed_data():
         title = "Dune du Pilat 677",
         location = "Dune du Pilat, France",
         year = 2014,
-        path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_677",
+        path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_677.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW4)
@@ -422,7 +422,7 @@ def seed_data():
         title = "Boise_154",
         location = "Boise, ID, USA",
         year = 2009,
-        path = "/images/h3000pxLongEdgeBoise_154.jpg",
+        path = "/images/h3000pxLongEdge/Boise_154.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW23)
@@ -449,7 +449,7 @@ def seed_data():
         title = "Agra 213",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Agra_213.jpg",
+        path = "/images/h3000pxLongEdge/Agra_213.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW26)
@@ -458,7 +458,7 @@ def seed_data():
         title = "Oregon Coast 026",
         location = "OR, USA",
         year = 2010,
-        path = "/images/v3000pxLongEdge/Oregon_Coast_026.jpg",
+        path = "/images/h3000pxLongEdge/Oregon_Coast_026.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW27)

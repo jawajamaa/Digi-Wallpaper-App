@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+import React, { Children, useEffect, useState } from "react";
+// import { Route } from "react-router-dom";
 // import { Switch, Route } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -11,10 +11,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { MobileWallContext, DesktopWallContext } from "../AppContext";
-import MobileWall from "./MobileWall";
-import DesktopWall from "./DesktopWall";
 // import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
+import { Outlet } from "react-router-dom";
 
 const baseUrl = "http://127.0.0.1:5555"
 const mobileRoute = "/mobilepapers"
@@ -24,7 +23,7 @@ function App() {
   const[toggleDarkMode, setToggleDarkMode] = useState(true);
   const[mobileWallState, setMobileWallState] = useState([])
   const[desktopWallState, setDesktopWallState] = useState([])
-  const[randomDesktop, setRandomDesktop] = useState(null)
+  // const[randomDesktop, setRandomDesktop] = useState(null)
 
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
@@ -80,11 +79,10 @@ function App() {
         </header>
         <main>
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
-            <MobileWall />
+            <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
+              <Outlet />
+            </DesktopWallContext.Provider>
           </MobileWallContext.Provider>
-          <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
-            <DesktopWall />
-          </DesktopWallContext.Provider>
           <CssBaseline />
         </main>
       </Container>
