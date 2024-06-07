@@ -12,6 +12,17 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String)
     email = db.Column(db.String)
 
+#   Relationship mapping user to their mobilewallpapers submitted
+    mobilepapers = db.relationship(
+        'MobileWallpaper', back_populates='users'
+        )
+    
+#   Relationship mapping user to their desktopwallpapers submitted
+    mobilepapers = db.relationship(
+        'DesktopWallpaper', back_populates='users'
+        )
+    
+
     def __repr__(self):
         return f'User {self.id}, {self.name} username: {self.username} email: {self.email}'
 
