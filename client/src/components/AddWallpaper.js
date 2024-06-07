@@ -61,7 +61,7 @@ function AddWallpaper() {
         },
     });
 
-// title, year, location image taken, path or url, username and name?
+// title, year, location image taken, path or url, username
     return(
         <div>
             <h2>Wallpaper additions go here!</h2>
