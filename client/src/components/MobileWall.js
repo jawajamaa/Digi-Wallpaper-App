@@ -13,7 +13,7 @@ function MobileWall() {
             <Box sx={{ ml: 10, width: 1000, height: 750, overflowY: 'scroll' }}>
                 <ImageList variant="masonry" cols={4} gap={8}>
                     {
-                        mobileWallState.map(mobilepaper => (
+                        mobileWallState?.map(mobilepaper => (
                             <MobileCard 
                                 key = { mobilepaper.id }
                                 mobilepaper = { mobilepaper }

@@ -18,11 +18,12 @@ class User(db.Model, SerializerMixin):
         )
     
 #   Relationship mapping user to their desktopwallpapers submitted
-    mobilepapers = db.relationship(
+    desktoppapers = db.relationship(
         'DesktopWallpaper', back_populates='users'
         )
     
-
+    serialize_rules = ('-mobilepapers.users','-desktoppapers.users')
+   
     def __repr__(self):
         return f'User {self.id}, {self.name} username: {self.username} email: {self.email}'
 
@@ -36,6 +37,12 @@ class MobileWallpaper(db.Model, SerializerMixin):
     path = db.Column(db.String)
 
     user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
+#   Relationship mapping mobile wallpapers to the user who submitted them
+    users = db.relationship(
+        'User', back_populates='mobilepapers'
+        )
+    
+    serialize_rules = ('-users.mobilepapers',)
 
     def __repr__(self):
         return f'Mobile Wallpaper {self.id}, Titled: {self.title} taken in {self.location} in {self.year} and the path to the image is: {self.path}'
@@ -50,6 +57,12 @@ class DesktopWallpaper(db.Model, SerializerMixin):
     path = db.Column(db.String)
 
     user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
+#   Relationship mapping desktopwallpapers to the user who submitted them
+    users = db.relationship(
+        'User', back_populates='desktoppapers'
+        )
+    
+    serialize_rules = ('-users.desktoppapers',)
 
     def __repr__(self):
         return f'Desktop Wallpaper {self.id}, Titled: {self.title} taken in {self.location} in {self.year} and the path to the image is: {self.path}'

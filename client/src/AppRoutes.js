@@ -4,6 +4,7 @@ import ErrorPage from "./components/ErrorPage";
 import DesktopWall from "./components/DesktopWall";
 import MobileWall from "./components/MobileWall";
 import AddWallpaper from "./components/AddWallpaper";
+import AddUser from "./components/AddUser";
 
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
             {
                 path: "/addwallpaper",
                 element: <AddWallpaper />
+            },
+            {
+                path: "/adduser",
+                element: <AddUser />
             }
         ]
     }

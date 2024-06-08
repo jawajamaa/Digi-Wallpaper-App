@@ -10,7 +10,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext } from "../AppContext";
+import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext, UserContext } from "../AppContext";
 // import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Outlet } from "react-router-dom";
@@ -19,7 +19,8 @@ const server_routes = {
   baseUrl : "http://127.0.0.1:5555",
   mobileRoute : "/mobilepapers",
   desktopRoute : "/desktoppapers",
-  commentsRoute: "/comments"
+  commentsRoute: "/comments",
+  usersRoute: "/users"
 }
 // const baseUrl = "http://127.0.0.1:5555"
 // const mobileRoute = "/mobilepapers"
@@ -31,6 +32,7 @@ function App() {
   const[serverRoutesState, setServerRoutesState] = useState(server_routes);
   const[mobileWallState, setMobileWallState] = useState([]);
   const[desktopWallState, setDesktopWallState] = useState([]);
+  const[userState, setUserState] = useState([]);
   const[refreshState, setRefreshState] = useState(false);
   // const[randomDesktop, setRandomDesktop] = useState(null);
 
@@ -38,7 +40,6 @@ function App() {
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
     fetch(server_routes.baseUrl + server_routes.mobileRoute)
-    // fetch(baseUrl + mobileRoute)
       .then(r => r.json())
       .then(data => {
         setMobileWallState(data)
@@ -50,7 +51,6 @@ function App() {
   // fetch DesktopWallpapers (horizontal)
   useEffect(() => {
     fetch(server_routes.baseUrl + server_routes.desktopRoute)
-    // fetch(baseUrl + desktopRoute)
       .then(r => r.json())
       .then(data => {
         setDesktopWallState(data)
@@ -58,6 +58,18 @@ function App() {
   }, [refreshState])
 
   console.log(desktopWallState)
+  
+  // fetch Users
+    useEffect(() => {
+      fetch(server_routes.baseUrl + server_routes.usersRoute)
+        .then(r => r.json())
+        .then(data => {
+          setUserState(data)
+        });
+    }, [refreshState])
+  
+    console.log(desktopWallState)
+
 
   const toggleDarkTheme = () => {
     setToggleDarkMode(!toggleDarkMode);
@@ -94,7 +106,9 @@ function App() {
             <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
               <RefreshContext.Provider value = { {refreshState, setRefreshState} }>
                 <ServerRouteContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
-                  <Outlet />
+                  <UserContext.Provider value = {{ userState, setUserState }}>
+                    <Outlet />
+                  </UserContext.Provider>
                 </ServerRouteContext.Provider>
               </RefreshContext.Provider>
             </DesktopWallContext.Provider>

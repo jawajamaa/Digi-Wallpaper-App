@@ -50,7 +50,7 @@ class MobilePapers(Resource):
             path=request.form.get("path"),
             username=request.form.get("username"),
         )
-    
+    # HERE is where I would query the db with the username to find the user_id?
         db.session.add(new_paper)
         db.session.commit()
 
@@ -101,9 +101,31 @@ api.add_resource(DesktopPapers, '/desktoppapers')
     
 #   2a) Desktop single wallpaper view RESTful conventions /desktoppapers/1 etc
 
+# 3) Add new user view - /users
+class Users(Resource):
 
+    def get(self):
+        u = [p.to_dict() for p in User.query.all()]
 
-# 1) Add new wallpaper view - /addwallpapers
+        return make_response( u, 200 )
+    
+    def post(self):
+        new_user = User(
+            name=request.form.get("name"),
+            username=request.form.get("username"),
+            email=request.form.get("email"),
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        new_user_dict = new_user.to_dict()
+
+        return make_response(
+            new_user_dict,
+            201
+        )
+api.add_resource(Users, '/users' )
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

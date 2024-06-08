@@ -15,7 +15,6 @@ function AddWallpaper() {
         desktopRoute
         } = serverRoutesState
 
-    console.log(baseUrl, mobileRoute, desktopRoute)
     // add image orientation validation?
     const formSchema = Yup.object().shape({
         title: Yup.string("Invalid title")
@@ -23,9 +22,7 @@ function AddWallpaper() {
         year: Yup.number()
             .positive()
             .integer()
-            .typeError("Please enter a number")
-            // .min(4, "Year must be 4 digits")
-            // .max(4, "Year must be 4 digits"),
+            .typeError("Please enter a number") 
             .lessThan(2025)
             .moreThan(1822),
         location: Yup.string("Please enter the location using letter not numbers")
@@ -119,7 +116,6 @@ function AddWallpaper() {
 
                 <button type = "submit"> Submit </button>
             </form>
-
         </div>
     );
 }
