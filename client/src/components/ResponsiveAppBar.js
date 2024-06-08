@@ -19,7 +19,7 @@ const pages = [
   {name: "Mobile", url: "/MobileWall"},
   {name: "Desktop", url: "/DesktopWall"},
   {name: "Add Mobile" ,url: "/AddWallpaper"},
-  {name: "Add User" ,url: "/AddUser"}
+  {name: "User" ,url: "/User"}
 ];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

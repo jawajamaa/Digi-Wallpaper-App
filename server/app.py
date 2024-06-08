@@ -127,5 +127,13 @@ class Users(Resource):
         )
 api.add_resource(Users, '/users' )
 
+class UsersbyUsername(Resource):
+
+    def get(self, username):
+        response_dict = User.query.filter_by(username=username).first.to_dict()
+        return make_response( response_dict, 200 )
+
+api.add_resource(UsersbyUsername)
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

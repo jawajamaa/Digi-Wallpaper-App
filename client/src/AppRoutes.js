@@ -4,7 +4,7 @@ import ErrorPage from "./components/ErrorPage";
 import DesktopWall from "./components/DesktopWall";
 import MobileWall from "./components/MobileWall";
 import AddWallpaper from "./components/AddWallpaper";
-import AddUser from "./components/AddUser";
+import UserAccordion from "./components/UserAccordion";
 
 
 const routes = [
@@ -30,8 +30,8 @@ const routes = [
                 element: <AddWallpaper />
             },
             {
-                path: "/adduser",
-                element: <AddUser />
+                path: "/user",
+                element: <UserAccordion />
             }
         ]
     }

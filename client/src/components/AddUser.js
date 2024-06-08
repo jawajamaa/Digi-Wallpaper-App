@@ -81,6 +81,8 @@ function AddUser() {
                     value={formik.values.email}
                 />
                 <p style={{ color:'red'}}> {formik.errors.email} </p>
+
+                {refreshState ? <p style={{ color:'red'}}> New User Submitted! </p> : null}
                 <button type = "submit"> Submit </button>
             </form>
         </div>
