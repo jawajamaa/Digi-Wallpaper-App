@@ -456,10 +456,10 @@ def seed_data():
     desktopW_list.append(desktopW25)
 
     desktopW26 = DesktopWallpaper(
-        title = "Agra 213",
-        location = "Agra, Uttar Pradesh, India",
-        year = 2010,
-        path = "/images/h3000pxLongEdge/Agra_213.jpg",
+        title = "Säntis 036",
+        location = "Switzerland",
+        year = 2011,
+        path = "/images/h3000pxLongEdge/Säntis_036.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW26)
@@ -486,7 +486,6 @@ def seed_data():
     print("Database seed complete - now it's entirely up to you!")
 
 if __name__ == '__main__':
-    # fake = Faker()
     with app.app_context():
         print("Starting seed process...")
         seed_data()

@@ -111,9 +111,9 @@ class Users(Resource):
     
     def post(self):
         new_user = User(
-            name=request.form.get("name"),
-            username=request.form.get("username"),
-            email=request.form.get("email"),
+            name=request.get_json().get("name"),
+            username=request.get_json().get("username"),
+            email=request.get_json().get("email"),
         )
 
         db.session.add(new_user)

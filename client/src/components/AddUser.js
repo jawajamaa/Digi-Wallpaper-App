@@ -32,20 +32,21 @@ function AddUser() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            console.log(values)
             fetch(baseUrl + usersRoute, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(values),
+                body: JSON.stringify(values, null, 2),
             }).then(r => {
                 if (r.status === 201) {
                     setRefreshState(!refreshState);
-                    return <h4>'New user,${formik.name} added'</h4>
                 }
             })
         }
     })
+
     return(
         <div>
             <h2>Add Users here</h2>
