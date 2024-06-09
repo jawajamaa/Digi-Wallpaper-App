@@ -147,7 +147,20 @@ api.add_resource(UsersbyUsername)
 # no route as the user is not necessary to display for privacy
 
 class UsersbyId(Resource):
-    pass
+    
+    def get(self):
+        response_dict = User.query.filter_by(id=id).first.to_dict()
+        return make_response( response_dict, 200 )
+    
+    def delete(self):
+        user_record = User.query.filter_by(id=id).first()
+
+        db.session.delete(user_record)
+        db.session.commit()
+
+        return make_response({
+            "Message": "User successfully deleted!"
+        }, 202 )
 
 api.add_resource(UsersbyId)
 # no route as the user is not necessary to display for privacy
