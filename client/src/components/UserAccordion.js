@@ -63,7 +63,9 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <SearchUser />
+            <SearchUser
+              expanded = { expanded }
+              handleChange = { handleChange } />
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -79,7 +81,7 @@ export default function CustomizedAccordions() {
       </Accordion>
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
+          <Typography>Delete User</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>

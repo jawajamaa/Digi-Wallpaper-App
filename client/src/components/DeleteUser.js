@@ -4,8 +4,8 @@ import * as Yup from "yup";
 
 import { UserContext } from "../AppContext";
 
-function SearchUser({ expanded, handleChange }) {
-    const { userState } = useContext(UserContext);
+function DeleteUser() {
+    const { userState, setUserState } = useContext(UserContext);
     const [foundUser, setFoundUser ]   = useState(null);
 
     const formSchema = Yup.object().shape({
@@ -28,10 +28,10 @@ function SearchUser({ expanded, handleChange }) {
             }
         }
     })
-    console.log(foundUser)
+    
     return(
         <div>
-            <h2>Enter Username here</h2>
+            <h2>Enter Username to Delete User</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
 
                 <label htmlFor="username">Username</label>
@@ -43,19 +43,12 @@ function SearchUser({ expanded, handleChange }) {
                     value={formik.values.username}
                 />
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
-                
-                {foundUser === null ? null : 
-                foundUser ? <p style={{ color:'green'}}> User Found! </p> : 
-                <>
-                {/* add setExpanded to props and setExpanded here? */}
-                <p style={{ color:'red'}}>User Not found!</p>
-                    <button type='button' expanded={expanded === 'panel2'} 
-                    onClick = { handleChange }>Add User </button>
-                </>}
+
+                {foundUser === null ? null : foundUser ? <p style={{ color:'green'}}> User Found! </p> : <p style={{ color:'red'}}>User Not found!</p>}
                 <button type = "submit"> Submit </button>
             </form>
         </div>
     );
 }
 
-export default SearchUser;
+export default DeleteUser;
