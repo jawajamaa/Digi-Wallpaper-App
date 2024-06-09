@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 import { UserContext } from "../AppContext";
 
-function SearchUser({ expanded, handleChange }) {
+function SearchUser() {
     const { userState } = useContext(UserContext);
     const [foundUser, setFoundUser ]   = useState(null);
 
@@ -28,7 +28,7 @@ function SearchUser({ expanded, handleChange }) {
             }
         }
     })
-    console.log(foundUser)
+
     return(
         <div>
             <h2>Enter Username here</h2>
@@ -46,12 +46,7 @@ function SearchUser({ expanded, handleChange }) {
                 
                 {foundUser === null ? null : 
                 foundUser ? <p style={{ color:'green'}}> User Found! </p> : 
-                <>
-                {/* add setExpanded to props and setExpanded here? */}
-                <p style={{ color:'red'}}>User Not found!</p>
-                    <button type='button' expanded={expanded === 'panel2'} 
-                    onClick = { handleChange }>Add User </button>
-                </>}
+                <p style={{ color:'red'}}>User Not found!</p>}
                 <button type = "submit"> Submit </button>
             </form>
         </div>

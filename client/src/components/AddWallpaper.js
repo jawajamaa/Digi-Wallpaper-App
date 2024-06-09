@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext } from "../AppContext";
+import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext } from "../AppContext";
 
 function AddWallpaper() {
     const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
     const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
-    const { serverRoutesState, setServerRoutesState } = useContext(ServerRouteContext);
+    const { serverRoutesState, setServerRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const {baseUrl,

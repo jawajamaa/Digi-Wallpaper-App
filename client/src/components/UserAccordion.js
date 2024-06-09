@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import AddUser from "./AddUser"
 import SearchUser from "./SearchUser"
+import DeleteUser from "./DeleteUser"
 
 // NOTE: this component imported from MUI for styling with small changes
 // //////////////////////////////////////////////////////////////////////
@@ -63,9 +64,7 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <SearchUser
-              expanded = { expanded }
-              handleChange = { handleChange } />
+            <SearchUser/>
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -85,10 +84,7 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget.
+            <DeleteUser />
           </Typography>
         </AccordionDetails>
       </Accordion>

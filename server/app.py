@@ -132,8 +132,25 @@ class UsersbyUsername(Resource):
     def get(self, username):
         response_dict = User.query.filter_by(username=username).first.to_dict()
         return make_response( response_dict, 200 )
+    
+    def delete(self, username):
+        user_record = User.query.filter_by(username=username).first()
+
+        db.session.delete(user_record)
+        db.session.commit()
+
+        return make_response({
+            "Message": "User successfully deleted!"
+        }, 202 )
 
 api.add_resource(UsersbyUsername)
+# no route as the user is not necessary to display for privacy
+
+class UsersbyId(Resource):
+    pass
+
+api.add_resource(UsersbyId)
+# no route as the user is not necessary to display for privacy
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

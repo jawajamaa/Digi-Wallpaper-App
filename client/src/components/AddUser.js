@@ -2,10 +2,10 @@ import React, { useContext} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { RefreshContext, ServerRouteContext } from "../AppContext";
+import { RefreshContext, ServerRoutesContext } from "../AppContext";
 
 function AddUser() {
-    const { serverRoutesState } = useContext(ServerRouteContext);
+    const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const {baseUrl,
@@ -32,7 +32,6 @@ function AddUser() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            console.log(values)
             fetch(baseUrl + usersRoute, {
                 method: 'POST',
                 headers: {

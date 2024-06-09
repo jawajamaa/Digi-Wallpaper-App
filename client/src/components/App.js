@@ -10,7 +10,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRouteContext, UserContext } from "../AppContext";
+import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 // import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Outlet } from "react-router-dom";
@@ -105,11 +105,11 @@ function App() {
           <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
             <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
               <RefreshContext.Provider value = { {refreshState, setRefreshState} }>
-                <ServerRouteContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
+                <ServerRoutesContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
                   <UserContext.Provider value = {{ userState, setUserState }}>
                     <Outlet />
                   </UserContext.Provider>
-                </ServerRouteContext.Provider>
+                </ServerRoutesContext.Provider>
               </RefreshContext.Provider>
             </DesktopWallContext.Provider>
           </MobileWallContext.Provider>

@@ -2,11 +2,19 @@ import React, { useContext, useState} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { UserContext } from "../AppContext";
+import { RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 
 function DeleteUser() {
     const { userState, setUserState } = useContext(UserContext);
-    const [foundUser, setFoundUser ]   = useState(null);
+    const { refreshState, setRefreshState } = useContext(RefreshContext);
+    const { serverRoutesState } = useContext(ServerRoutesContext);
+
+    const [foundUserBool, setFoundUserBool ] = useState(null);
+    const [foundUser, setFoundUser ] = useState("");
+
+    const {baseUrl,
+        usersRoute
+        } = serverRoutesState 
 
     const formSchema = Yup.object().shape({
         username: Yup.string()
@@ -22,12 +30,21 @@ function DeleteUser() {
         onSubmit: (values) => {
             let found = userState.find(p => p.username === values.username)
             if (found && found.username === values.username) {
-                setFoundUser(true)
+                setFoundUserBool(true)
+                setFoundUser(found)
             } else {
-                setFoundUser(false)
+                setFoundUserBool(false)
             }
         }
     })
+    
+    function handleDeleteUser(foundUser) {
+        console.log(foundUser)
+        console.log(foundUser.id)
+        fetch((baseUrl + usersRoute), {
+            method: "DELETE"
+        })
+    };
     
     return(
         <div>
@@ -44,7 +61,14 @@ function DeleteUser() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
-                {foundUser === null ? null : foundUser ? <p style={{ color:'green'}}> User Found! </p> : <p style={{ color:'red'}}>User Not found!</p>}
+                {foundUserBool === null ? null : 
+                foundUserBool ? 
+                    <>
+                        <p style={{ color:'green'}}> User Found! </p>
+                        <button type = "button" onClick = { handleDeleteUser(foundUser) }>Delete User</button>
+                    </> : 
+                    <p style={{ color:'red'}}>User Not found!</p>}
+                    
                 <button type = "submit"> Submit </button>
             </form>
         </div>
