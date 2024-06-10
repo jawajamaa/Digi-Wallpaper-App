@@ -28,4 +28,6 @@ db.init_app(app)
 api = Api(app)
 
 # Instantiate CORS
-CORS(app)
+CORS(app, origins=["http://127.0.0.1:3000"])
+# CORS_ALLOW_HEADERS(*)
+# CORS_METHODS(”GET”, “HEAD”, “POST”, “OPTIONS”, “PUT”, “PATCH”, “DELETE”)

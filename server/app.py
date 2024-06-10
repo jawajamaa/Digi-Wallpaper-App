@@ -3,6 +3,7 @@
 # Standard library imports
 # Remote library imports
 from flask import Flask, jsonify, make_response, request
+# from flask import cross_origin
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Resource
@@ -17,6 +18,7 @@ from models import User, MobileWallpaper, DesktopWallpaper
 # Views go here!
 class Home(Resource):
 
+    # @cross_origin
     def get(self):
         response_dict = {
             "message": "Mobile and Desktop Wallpaper"
@@ -37,10 +39,13 @@ api.add_resource(Home, '/')
 # 1) Mobile view - /mobilepapers
 class MobilePapers(Resource):
 
+    # @cross_origin
     def get(self):
         mp = [mobileP.to_dict() for mobileP in MobileWallpaper.query.all()]
-
-        return make_response( mp, 200 )
+        response = make_response( mp, 200 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+    
     # title, year, location image taken, path or url, username
     def post(self):
         new_paper = MobileWallpaper(
@@ -80,10 +85,12 @@ api.add_resource(MobilePapers, '/mobilepapers')
 # 2) Desktop view - /desktoppapers
 class DesktopPapers(Resource):
 
+    # @cross_origin
     def get(self):
         dp = [desktopP.to_dict() for desktopP in DesktopWallpaper.query.all()]
-
-        return make_response( dp, 200 )
+        response = make_response( dp, 200 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
     
 api.add_resource(DesktopPapers, '/desktoppapers')
 
@@ -104,10 +111,13 @@ api.add_resource(DesktopPapers, '/desktoppapers')
 # 3) Add new user view - /users
 class Users(Resource):
 
+    # @cross_origin
     def get(self):
         u = [p.to_dict() for p in User.query.all()]
-
-        return make_response( u, 200 )
+        response = make_response( u, 200 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        # return make_response( u, 200 )
     
     def post(self):
         new_user = User(
@@ -129,9 +139,13 @@ api.add_resource(Users, '/users' )
 
 class UsersbyUsername(Resource):
 
+    # @cross_origin
     def get(self, username):
         response_dict = User.query.filter_by(username=username).first.to_dict()
-        return make_response( response_dict, 200 )
+        response = make_response( response_dict, 200 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        # return make_response( response_dict, 200 )
     
     def delete(self, username):
         user_record = User.query.filter_by(username=username).first()
@@ -148,9 +162,13 @@ api.add_resource(UsersbyUsername)
 
 class UsersbyId(Resource):
     
+    # @cross_origin
     def get(self):
         response_dict = User.query.filter_by(id=id).first.to_dict()
-        return make_response( response_dict, 200 )
+        response = make_response( response_dict, 200 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
+        # return make_response( response_dict, 200 )
     
     def delete(self):
         user_record = User.query.filter_by(id=id).first()
@@ -158,9 +176,11 @@ class UsersbyId(Resource):
         db.session.delete(user_record)
         db.session.commit()
 
-        return make_response({
+        response = make_response({
             "Message": "User successfully deleted!"
         }, 202 )
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response
 
 api.add_resource(UsersbyId)
 # no route as the user is not necessary to display for privacy

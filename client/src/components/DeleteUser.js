@@ -38,11 +38,16 @@ function DeleteUser() {
         }
     })
     
-    function handleDeleteUser(foundUser) {
+    function handleDeleteUser() {
         console.log(foundUser)
         console.log(foundUser.id)
-        fetch((baseUrl + usersRoute), {
+        fetch((`${baseUrl}${usersRoute}/${foundUser.id}/`), {
             method: "DELETE"
+        }).then(r => r.json())
+        .then(r => {
+            if (r.ok) {
+                setRefreshState(!refreshState)
+            }
         })
     };
     
@@ -65,7 +70,7 @@ function DeleteUser() {
                 foundUserBool ? 
                     <>
                         <p style={{ color:'green'}}> User Found! </p>
-                        <button type = "button" onClick = { handleDeleteUser(foundUser) }>Delete User</button>
+                        <button type = "button" onClick = { handleDeleteUser }>Delete User</button>
                     </> : 
                     <p style={{ color:'red'}}>User Not found!</p>}
                     

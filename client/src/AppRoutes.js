@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import ErrorPage from "./components/ErrorPage";
 import DesktopWall from "./components/DesktopWall";
 import MobileWall from "./components/MobileWall";
-import AddWallpaper from "./components/AddWallpaper";
+import AddWallAccordion from "./components/AddWallAccordion";
 import UserAccordion from "./components/UserAccordion";
 
 
@@ -27,7 +27,7 @@ const routes = [
             },
             {
                 path: "/addwallpaper",
-                element: <AddWallpaper />
+                element: <AddWallAccordion />
             },
             {
                 path: "/user",

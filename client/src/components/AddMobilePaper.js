@@ -4,18 +4,17 @@ import * as Yup from "yup";
 
 import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext } from "../AppContext";
 
-function AddWallpaper() {
+function AddMobilePaper() {
     const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
     const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
     const { serverRoutesState, setServerRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const {baseUrl,
-        mobileRoute,
-        desktopRoute
+        mobileRoute
         } = serverRoutesState
 
-    // add image orientation validation?
+
     const formSchema = Yup.object().shape({
         title: Yup.string("Invalid title")
             .required("Image must have a title"),
@@ -61,7 +60,7 @@ function AddWallpaper() {
 // title, year, location image taken, path or url, username
     return(
         <div>
-            <h2>Wallpaper additions go here!</h2>
+            <h2>Mobile (Vertical) Wallpaper additions go here!</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
 
                 <label htmlfor="title">Image Title</label>
@@ -120,4 +119,4 @@ function AddWallpaper() {
     );
 }
 
-export default AddWallpaper;
+export default AddMobilePaper;
