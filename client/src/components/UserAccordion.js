@@ -7,7 +7,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 
 import AddUser from "./AddUser"
-import SearchUser from "./SearchUser"
+import UpdateUser from "./UpdateUser"
 import DeleteUser from "./DeleteUser"
 
 // NOTE: this component imported from MUI for styling with small changes
@@ -60,11 +60,11 @@ export default function CustomizedAccordions() {
     <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Search User</Typography>
+          <Typography>Update User</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <SearchUser/>
+            <UpdateUser/>
           </Typography>
         </AccordionDetails>
       </Accordion>
