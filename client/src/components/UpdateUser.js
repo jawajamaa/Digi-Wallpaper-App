@@ -2,122 +2,68 @@ import React, { useContext, useState} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { RefreshContext, UserContext } from "../AppContext";
+import { RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
-import UserFound from "./UserFound"
 
 function UpdateUser() {
+    const { serverRoutesState } = useContext(ServerRoutesContext);
     const { userState } = useContext(UserContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
-    const [foundUser, setFoundUser ] = useState([]);
-    const [userLookup, setUserLookup ] = useState(<WaitingForInput />);
-
-    const formSchema = Yup.object().shape({
+    const [userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
+    
+    const {baseUrl,
+        usersRoute
+    } = serverRoutesState;
+    
+    let schemaFields = {
         username: Yup.string()
             .min(8, "Username must be at least 8 characters")
             .required("User must have a username"),
-    });
-
-    function handleSetFoundUser(found){
-        setFoundUser(found)
+    };
+    if (userLookup.found) {
+        schemaFields.name = Yup.string()
+            .min(2, "Name must have at least 2 characters")
+            .required("User must have a name");
+        schemaFields.email = Yup.string()
+            .email()
+            .required("User must have an email");
     }
-    console.log(foundUser)
-    
+
     const formik = useFormik({
         initialValues: {
-            username: ""
+            username: "",
+            name: "",
+            email: "",
         },
-        validationSchema: formSchema,
+        validationSchema: Yup.object().shape(schemaFields),
         onSubmit: (values) => {
-            let found = userState.find(p => p.username === values.username)
-            console.log(found)
-            if (found && found.username === values.username) {
-                handleSetFoundUser(found)
-                // setFoundUser(found)
-                // setRefreshState(refeshState)
-                    setUserLookup(<UserFound 
-                        foundUser = { found }
-                    />)
+            if (userLookup.found) {
+                fetch((`${baseUrl}${usersRoute}/${userLookup.found.id}`), {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                }).then(r => {
+                    if (r.ok) {
+                        setRefreshState(!refreshState);
+                        setUserLookup({"searched": false, "found": null});
+                        formik.resetForm();
+                    }
+                })
             } else {
-                setUserLookup(<UserNotFound />)
+                let found = userState.find(p => p.username === values.username)
+                console.log(found)
+                formik.values.name = found?.name || "";
+                formik.values.email = found?.email || "";
+                setUserLookup({"searched": true, "found": found})
             }
         }
-    })
-
-    function WaitingForInput() {
-        return (<SubmitButton />);
-    }
-
-    // function UserFound(foundUser) {
-
-    //     function handleUpdateUser() {
-    //         const formik = useFormik({
-    //             initialValues: {
-    //                 username: foundUser.username,
-    //                 name: "",
-    //                 email: ""
-    //             },
-    //             validationSchema: formSchema,
-    //             onSubmit: (values) => {
-    //                 fetch((`${baseUrl}${usersRoute}/${foundUser.id}`), {
-    //                     method: 'PATCH',
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                     },
-    //                     body: JSON.stringify(values),
-    //                 }).then(r => r.json())
-    //                 .then(r => {
-    //                     if (r.ok) {
-    //                         setRefreshState(!refreshState)
-    //                     }
-    //                 })
-    //             }
-    //         })
-    //     }
-
-    //     return (
-    //     <>
-    //         <p style={{ color:'green'}}> User Found! </p>
-    //         <h2>Enter Name here</h2>
-    //         <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
-
-    //             <label htmlFor="name">Name</label>
-    //             <br />
-    //             <input 
-    //                 id="name"
-    //                 name="name"
-    //                 onChange={formik.handleChange}
-    //                 value={formik.values.name}
-    //             />
-    //             <p style={{ color:'red'}}> {formik.errors.name} </p>
-                
-    //             <label htmlFor="email">Email</label>
-    //             <br />
-    //             <input 
-    //                 id="email"
-    //                 name="email"
-    //                 onChange={formik.handleChange}
-    //                 value={formik.values.email}
-    //             />
-    //             <p style={{ color:'red'}}> {formik.errors.email} </p>
-
-
-    //         <SubmitButton type = "button" onClick = { handleUpdateUser } label = "Update User" />
-    //         </form>
-    //     </>);
-    // }
-    
-    function UserNotFound() {
-        return (
-            <>
-                <p style={{ color:'red'}}>User Not found!</p>
-                <SubmitButton />
-            </>);
-    }
+    })   
 
     return(
         <div>
-            <h2>Enter Username here</h2>
+            <h2>Enter Userinformation here</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
 
                 <label htmlFor="username">Username</label>
@@ -129,11 +75,32 @@ function UpdateUser() {
                     value={formik.values.username}
                 />
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
-                {userLookup}
-                {/* {foundUser === null ? null : 
-                foundUser ? <p style={{ color:'green'}}> User Found! </p> : 
-                <p style={{ color:'red'}}>User Not found!</p>}
-                <SubmitButton /> */}
+
+                <div style={{display: (userLookup.found) ? "" : "none"}}>
+                    <label htmlFor="name">Name</label>
+                    <br />
+                    <input 
+                        id="name"
+                        name="name"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                    />
+                    <p style={{ color:'red'}}> {formik.errors.name} </p>
+                    
+                    <label htmlFor="email">Email</label>
+                    <br />
+                    <input 
+                        id="email"
+                        name="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                    />
+                    <p style={{ color:'red'}}> {formik.errors.email} </p>
+                </div>
+
+                {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>User Not found!</p> : null}
+                <SubmitButton label={userLookup.found ? "Update" : "Search"} />
+        
             </form>
         </div>
     );

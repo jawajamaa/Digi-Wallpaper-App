@@ -82,7 +82,7 @@ function UserFound({ foundUser }) {
             <p style={{ color:'red'}}> {formik.errors.email} </p>
 
 
-        <SubmitButton type = "button" label = "Update User" />
+        <SubmitButton type = "submit" label = "Update User" />
         </form>
     </>);
 }

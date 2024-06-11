@@ -7,8 +7,9 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 
 import AddUser from "./AddUser"
-import UpdateUser from "./UpdateUser"
 import DeleteUser from "./DeleteUser"
+import SearchUser from "./SearchUser"
+import UpdateUser from "./UpdateUser"
 
 // NOTE: this component imported from MUI for styling with small changes
 // //////////////////////////////////////////////////////////////////////
@@ -60,6 +61,16 @@ export default function CustomizedAccordions() {
     <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography>Search User</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            <SearchUser />
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography>Update User</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -68,8 +79,8 @@ export default function CustomizedAccordions() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
           <Typography>Add User</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -78,8 +89,8 @@ export default function CustomizedAccordions() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+      <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+        <AccordionSummary aria-controls="panel4d-content" id="panel4d-header">
           <Typography>Delete User</Typography>
         </AccordionSummary>
         <AccordionDetails>

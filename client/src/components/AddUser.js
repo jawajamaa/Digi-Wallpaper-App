@@ -35,6 +35,7 @@ function AddUser() {
         validationSchema: formSchema,
         onSubmit: (values) => {
             let found = userState.find(p => p.username === values.username)
+            console.log("hello")
             if (found && found.username === values.username) {
                 return <p style={{ color:'red'}}> Username taken already! </p>
             } else {

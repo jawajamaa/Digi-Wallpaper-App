@@ -146,7 +146,7 @@ class UsersbyId(Resource):
         return make_response( response_dict, 200 )
     
     def patch(self, id):
-        breakpoint()
+        # breakpoint()
         user = User.query.filter_by(id=id).first()
 
         for attr in request.get_json():
