@@ -35,11 +35,9 @@ function UpdateUser() {
                 handleSetFoundUser(found)
                 // setFoundUser(found)
                 // setRefreshState(refeshState)
-                setTimeout(() => {
                     setUserLookup(<UserFound 
-                        foundUser = { foundUser }
+                        foundUser = { found }
                     />)
-                }, 1000)
             } else {
                 setUserLookup(<UserNotFound />)
             }
