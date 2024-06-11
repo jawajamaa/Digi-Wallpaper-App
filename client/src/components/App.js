@@ -68,7 +68,7 @@ function App() {
         });
     }, [refreshState])
   
-    console.log(desktopWallState)
+    console.log(userState)
 
 
   const toggleDarkTheme = () => {

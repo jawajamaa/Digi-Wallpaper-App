@@ -145,6 +145,18 @@ class UsersbyId(Resource):
         response_dict = User.query.filter_by(id=id).first().to_dict()
         return make_response( response_dict, 200 )
     
+    def patch(self, id):
+        user = User.query.filter_by(id=id).first()
+
+        for attr in request.get_json():
+            setattr(user, attr, request.get_json()[attr])
+
+        db.session.add(user)
+        db.session.commit()
+
+        user_dict = user.to_dict()
+        return make_response( user_dict, 202 ) 
+    
     def delete(self, id):
         user_record = User.query.filter_by(id=id).first()
 
@@ -156,7 +168,7 @@ class UsersbyId(Resource):
         }, 202 )
         return response
 
-api.add_resource(UsersbyId, "/users/<id>")
+api.add_resource(UsersbyId, "/users/<int:id>")
 
 
 if __name__ == '__main__':

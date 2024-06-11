@@ -7,7 +7,8 @@ import SubmitButton from "./SubmitButton";
 
 function SearchUser() {
     const { userState } = useContext(UserContext);
-    const [foundUser, setFoundUser ]   = useState(null);
+    // const [foundUser, setFoundUser ] = useState(null);
+    const [userLookup, setUserLookup ] = useState(WaitingForInput);
 
     const formSchema = Yup.object().shape({
         username: Yup.string()
@@ -23,12 +24,83 @@ function SearchUser() {
         onSubmit: (values) => {
             let found = userState.find(p => p.username === values.username)
             if (found && found.username === values.username) {
-                setFoundUser(true)
+                setUserLookup(new userFound(found))
             } else {
-                setFoundUser(false)
+                setUserLookup(userNotFound)
             }
         }
     })
+
+    function WaitingForInput() {
+        return (<SubmitButton />);
+    }
+
+    function UserFound(foundUser) {
+
+        function handleUpdateUser() {
+            const formik = useFormik({
+                initialValues: {
+                    username: foundUser.username,
+                    name: "",
+                    email: ""
+                },
+                validationSchema: formSchema,
+                onSubmit: (values) => {
+                    fetch((`${baseUrl}${usersRoute}/${foundUser.id}`), {
+                        method: 'PATCH',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(values),
+                    }).then(r => r.json())
+                    .then(r => {
+                        if (r.ok) {
+                            setRefreshState(!refreshState)
+                        }
+                    })
+                }
+            })
+        }
+
+        return (
+        <>
+            <p style={{ color:'green'}}> User Found! </p>
+            <h2>Enter Name here</h2>
+            <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+
+                <label htmlFor="name">Name</label>
+                <br />
+                <input 
+                    id="name"
+                    name="name"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                />
+                <p style={{ color:'red'}}> {formik.errors.name} </p>
+                
+                <label htmlFor="email">Email</label>
+                <br />
+                <input 
+                    id="email"
+                    name="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                />
+                <p style={{ color:'red'}}> {formik.errors.email} </p>
+
+
+            <SubmitButton type = "button" onClick = { handleUpdateUser } label = "Update User" />
+            </form>
+        </>);
+    }
+    
+    function UserNotFound() {
+        return (
+            <>
+                <p style={{ color:'red'}}>User Not found!</p>
+                <SubmitButton />
+            </>);
+    }
 
     return(
         <div>
@@ -44,12 +116,11 @@ function SearchUser() {
                     value={formik.values.username}
                 />
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
-                
-                {foundUser === null ? null : 
+                {userLookup}
+                {/* {foundUser === null ? null : 
                 foundUser ? <p style={{ color:'green'}}> User Found! </p> : 
                 <p style={{ color:'red'}}>User Not found!</p>}
-                {/* <SubmitButton /> */}
-                <button type = "submit"> Submit </button>
+                <SubmitButton /> */}
             </form>
         </div>
     );

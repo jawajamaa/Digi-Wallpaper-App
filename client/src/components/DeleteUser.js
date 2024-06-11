@@ -6,7 +6,7 @@ import { RefreshContext, ServerRoutesContext, UserContext } from "../AppContext"
 import SubmitButton from "./SubmitButton";
 
 function DeleteUser() {
-    const { userState, setUserState } = useContext(UserContext);
+    const { userState } = useContext(UserContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
 
@@ -30,9 +30,9 @@ function DeleteUser() {
         onSubmit: (values) => {
             let found = userState.find(p => p.username === values.username)
             if (found && found.username === values.username) {
-                setUserLookup(new UserFound(found))
+                setUserLookup(new userFound(found))
             } else {
-                setUserLookup(UserNotFound)
+                setUserLookup(userNotFound)
             }
         }
     })
@@ -41,12 +41,10 @@ function DeleteUser() {
         return (<SubmitButton />);
     }
     
-    function UserFound(foundUser) {
+    function userFound(foundUser) {
         function handleDeleteUser() {
-            console.log(foundUser)
-            console.log(foundUser.id)
             fetch((`${baseUrl}${usersRoute}/${foundUser.id}`), {
-                method: "DELETE"
+                method: 'DELETE'
             }).then(r => r.json())
             .then(r => {
                 if (r.ok) {
@@ -62,7 +60,7 @@ function DeleteUser() {
         </>);
     }
     
-    function UserNotFound() {
+    function userNotFound() {
         return (<>
             <p style={{ color:'red'}}>User Not found!</p>
             <SubmitButton />

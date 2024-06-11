@@ -2,14 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext } from "../AppContext";
+import { RefreshContext, ServerRoutesContext } from "../AppContext";
 
 import SubmitButton from "./SubmitButton";
 
 function AddDesktopPaper() {
-    const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
-    const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
-    const { serverRoutesState, setServerRoutesState } = useContext(ServerRoutesContext);
+    // const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
+    // const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
+    const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const {baseUrl,
@@ -58,7 +58,6 @@ function AddDesktopPaper() {
         },
     });
 
-// title, year, location image taken, path or url, username
     return(
         <div>
             <h2>Desktop (Horizontal) Wallpaper additions go here!</h2>
@@ -115,7 +114,6 @@ function AddDesktopPaper() {
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
                 <SubmitButton />
-                {/* <button type = "submit"> Submit </button> */}
             </form>
         </div>
     );

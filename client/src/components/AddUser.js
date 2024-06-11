@@ -2,11 +2,12 @@ import React, { useContext} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { RefreshContext, ServerRoutesContext } from "../AppContext";
+import { RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
 function AddUser() {
     const { serverRoutesState } = useContext(ServerRoutesContext);
+    const { userState } = useContext(UserContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const {baseUrl,
@@ -33,6 +34,10 @@ function AddUser() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            let found = userState.find(p => p.username === values.username)
+            if (found && found.username === values.username) {
+                return <p style={{ color:'red'}}> Username taken already! </p>
+            } else {
             fetch(baseUrl + usersRoute, {
                 method: 'POST',
                 headers: {
@@ -44,8 +49,30 @@ function AddUser() {
                     setRefreshState(!refreshState);
                 }
             })
-        }
+        }}
     })
+
+    // const formik = useFormik({
+    //     initialValues: {
+    //         name: "",
+    //         username: "",
+    //         email: ""
+    //     },
+    //     validationSchema: formSchema,
+    //     onSubmit: (values) => {
+    //         fetch(baseUrl + usersRoute, {
+    //             method: 'POST',
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify(values, null, 2),
+    //         }).then(r => {
+    //             if (r.status === 201) {
+    //                 setRefreshState(!refreshState);
+    //             }
+    //         })
+    //     }
+    // })
 
     return(
         <div>
@@ -83,8 +110,7 @@ function AddUser() {
                 <p style={{ color:'red'}}> {formik.errors.email} </p>
 
                 {refreshState ? <p style={{ color:'red'}}> New User Submitted! </p> : null}
-                {/* <SubmitButton /> */}
-                <button type = "submit"> Submit </button>
+                <SubmitButton />
             </form>
         </div>
     );
