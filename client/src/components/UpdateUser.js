@@ -63,7 +63,7 @@ function UpdateUser() {
 
     return(
         <div>
-            <h2>Enter Userinformation here</h2>
+            <h2>Enter Username</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
 
                 <label htmlFor="username">Username</label>
