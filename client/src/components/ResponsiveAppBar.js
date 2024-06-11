@@ -18,7 +18,7 @@ const pages = [
   {name: "Home", url: "/"},
   {name: "Mobile", url: "/MobileWall"},
   {name: "Desktop", url: "/DesktopWall"},
-  {name: "Add Mobile" ,url: "/AddWallpaper"},
+  {name: "Add Wallpaper" ,url: "/AddWallpaper"},
   {name: "User" ,url: "/User"}
 ];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];

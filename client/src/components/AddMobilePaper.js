@@ -4,6 +4,8 @@ import * as Yup from "yup";
 
 import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext } from "../AppContext";
 
+import SubmitButton from "./SubmitButton";
+
 function AddMobilePaper() {
     const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
     const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
@@ -113,7 +115,8 @@ function AddMobilePaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
-                <button type = "submit"> Submit </button>
+                {/* <button type = "submit"> Submit </button> */}
+                <SubmitButton />
             </form>
         </div>
     );

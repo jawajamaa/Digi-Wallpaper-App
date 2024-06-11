@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { RefreshContext, ServerRoutesContext } from "../AppContext";
+import SubmitButton from "./SubmitButton";
 
 function AddUser() {
     const { serverRoutesState } = useContext(ServerRoutesContext);
@@ -82,6 +83,7 @@ function AddUser() {
                 <p style={{ color:'red'}}> {formik.errors.email} </p>
 
                 {refreshState ? <p style={{ color:'red'}}> New User Submitted! </p> : null}
+                {/* <SubmitButton /> */}
                 <button type = "submit"> Submit </button>
             </form>
         </div>

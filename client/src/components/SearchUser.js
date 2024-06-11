@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { UserContext } from "../AppContext";
+import SubmitButton from "./SubmitButton";
 
 function SearchUser() {
     const { userState } = useContext(UserContext);
@@ -47,6 +48,7 @@ function SearchUser() {
                 {foundUser === null ? null : 
                 foundUser ? <p style={{ color:'green'}}> User Found! </p> : 
                 <p style={{ color:'red'}}>User Not found!</p>}
+                {/* <SubmitButton /> */}
                 <button type = "submit"> Submit </button>
             </form>
         </div>
