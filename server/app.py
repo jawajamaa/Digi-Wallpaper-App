@@ -121,9 +121,6 @@ class UsersbyUsername(Resource):
 
     def get(self, username):
         response_dict = User.query.filter_by(username=username).first.to_dict()
-        # response = make_response( response_dict, 200 )
-        # response.headers.add("Access-Control-Allow-Origin", "*")
-        # return response
         return make_response( response_dict, 200 )
     
     def delete(self, username):
@@ -146,7 +143,6 @@ class UsersbyId(Resource):
         return make_response( response_dict, 200 )
     
     def patch(self, id):
-        # breakpoint()
         user = User.query.filter_by(id=id).first()
 
         for attr in request.get_json():

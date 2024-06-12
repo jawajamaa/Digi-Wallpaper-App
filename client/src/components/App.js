@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { Route } from "react-router-dom";
-// import { Switch, Route } from "react-router-dom";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +9,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
-// import NavBar from "./NavBar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Outlet } from "react-router-dom";
 
@@ -22,10 +19,6 @@ const server_routes = {
   commentsRoute: "/comments",
   usersRoute: "/users"
 }
-// const baseUrl = "http://127.0.0.1:5555"
-// const mobileRoute = "/mobilepapers"
-// const desktopRoute = "/desktoppapers"
-// const commentsRoute= "/comments"
 
 function App() {
   const[toggleDarkMode, setToggleDarkMode] = useState(true);
@@ -34,7 +27,7 @@ function App() {
   const[desktopWallState, setDesktopWallState] = useState([]);
   const[userState, setUserState] = useState([]);
   const[refreshState, setRefreshState] = useState(false);
-  // const[randomDesktop, setRandomDesktop] = useState(null);
+ 
 
   console.log(server_routes.baseUrl + server_routes.mobileRoute)
   // fetch MobileWallpapers (vertical)
@@ -92,10 +85,6 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Container>
         <header>
-          {/* <NavBar
-            toggleDarkMode = { toggleDarkMode }
-            toggleDarkTheme = { toggleDarkTheme }
-           /> */}
            <ResponsiveAppBar 
               toggleDarkMode = { toggleDarkMode }
               toggleDarkTheme = { toggleDarkTheme }

@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
+// NOTE: this component contains some more advanced code as I received some help to refactor for better logic and convince this component to work! :-)
+// //////////////////////////////////////////////////////////////////////
 function UpdateUser() {
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { userState } = useContext(UserContext);

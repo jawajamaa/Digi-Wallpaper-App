@@ -53,28 +53,6 @@ function AddUser() {
         }}
     })
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         name: "",
-    //         username: "",
-    //         email: ""
-    //     },
-    //     validationSchema: formSchema,
-    //     onSubmit: (values) => {
-    //         fetch(baseUrl + usersRoute, {
-    //             method: 'POST',
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify(values, null, 2),
-    //         }).then(r => {
-    //             if (r.status === 201) {
-    //                 setRefreshState(!refreshState);
-    //             }
-    //         })
-    //     }
-    // })
-
     return(
         <div>
             <h2>Add Users here</h2>

@@ -7,8 +7,6 @@ import { RefreshContext, ServerRoutesContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
 function AddDesktopPaper() {
-    // const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
-    // const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
