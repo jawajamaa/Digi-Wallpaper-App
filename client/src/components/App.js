@@ -29,7 +29,6 @@ function App() {
   const[refreshState, setRefreshState] = useState(false);
  
 
-  console.log(server_routes.baseUrl + server_routes.mobileRoute)
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
     fetch(server_routes.baseUrl + server_routes.mobileRoute)
@@ -51,7 +50,7 @@ function App() {
   }, [refreshState])
 
   console.log(desktopWallState)
-  
+
   // fetch Users
     useEffect(() => {
       fetch(server_routes.baseUrl + server_routes.usersRoute)
