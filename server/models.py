@@ -34,6 +34,7 @@ class MobileWallpaper(db.Model, SerializerMixin):
     title = db.Column(db.String)
     location = db.Column(db.String)
     year = db.Column(db.Integer)
+    horizontal = db.Column(db.Boolean)
     path = db.Column(db.String)
 
     user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -54,6 +55,7 @@ class DesktopWallpaper(db.Model, SerializerMixin):
     title = db.Column(db.String)
     location = db.Column(db.String)
     year = db.Column(db.Integer)
+    horizontal = db.Column(db.Boolean)
     path = db.Column(db.String)
 
     user_id  = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -74,7 +76,7 @@ class Comment(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    rating = db.Column(db.Float)
+    rating = db.Column(db.Integer)
     comment = db.Column(db.String)
 
     mobilewallpapers_id = db.Column(db.Integer, db.ForeignKey('mobilewallpapers.id'), nullable=True)

@@ -20,6 +20,7 @@ function DesktopWall() {
                                 title = { desktoppaper.title }
                                 location = { desktoppaper.location }
                                 year = { desktoppaper.year }
+                                horizontal = { desktoppaper.horizontal }
                                 path = { desktoppaper.path }
                                 user_id = { desktoppaper.user_id }
                             />

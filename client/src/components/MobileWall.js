@@ -20,6 +20,7 @@ function MobileWall() {
                                 title = { mobilepaper.title }
                                 location = { mobilepaper.location }
                                 year = { mobilepaper.year }
+                                horizontal = { mobilepaper.horizontal }
                                 path = { mobilepaper.path }
                                 user_id = { mobilepaper.user_id }
                             />

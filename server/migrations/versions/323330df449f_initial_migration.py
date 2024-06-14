@@ -1,8 +1,8 @@
 """initial migration
 
-Revision ID: 21fe4d0e6e8f
+Revision ID: 323330df449f
 Revises: 
-Create Date: 2024-06-12 14:43:10.691348
+Create Date: 2024-06-14 15:43:21.950637
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '21fe4d0e6e8f'
+revision = '323330df449f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,6 +30,7 @@ def upgrade():
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=True),
     sa.Column('year', sa.Integer(), nullable=True),
+    sa.Column('horizontal', sa.Boolean(), nullable=True),
     sa.Column('path', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_desktopwallpapers_user_id_users')),
@@ -40,6 +41,7 @@ def upgrade():
     sa.Column('title', sa.String(), nullable=True),
     sa.Column('location', sa.String(), nullable=True),
     sa.Column('year', sa.Integer(), nullable=True),
+    sa.Column('horizontal', sa.Boolean(), nullable=True),
     sa.Column('path', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_mobilewallpapers_user_id_users')),
@@ -48,7 +50,7 @@ def upgrade():
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
-    sa.Column('rating', sa.Float(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('comment', sa.String(), nullable=True),
     sa.Column('mobilewallpapers_id', sa.Integer(), nullable=True),
     sa.Column('desktopwallpapers_id', sa.Integer(), nullable=True),

@@ -40,7 +40,7 @@ def seed_data():
 
     db.session.add_all(users_list)
 
-# seed mobile wallpaper (maybe also 20, leaving 3 to add later?)
+# seed mobile wallpaper 
     print("adding Mobile Wallpapers...")
     mobileW_list =[]
 
@@ -48,6 +48,7 @@ def seed_data():
         title = "SLO",
         location = "San Luis Obispo, CA, USA",
         year = 2012,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/120428_SLO_076.jpg",
         user_id = randint(1, x),
     )
@@ -57,6 +58,7 @@ def seed_data():
         title = "Dune du Pilat 682",
         location = "Dune du Pilat, France",
         year = 2013,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/20140920_Dune_du_Pilat_682.jpg",
         user_id = randint(1, x),
     )
@@ -66,6 +68,7 @@ def seed_data():
         title = "Elephant",
         location = "Cochin, Carola, India",
         year = 2010,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Cochin_Elephant_104.jpg",
         user_id = randint(1, x),
     )
@@ -75,6 +78,7 @@ def seed_data():
         title = "Lake Havasu",
         location = "Lake Havasu, AZ, USA",
         year = 2001,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/LakeHavasu1.5.jpg",
         user_id = randint(1, x),
     )
@@ -84,6 +88,7 @@ def seed_data():
         title = "Windmills 40",
         location = "Palm Springs, CA, USA",
         year = 2009,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/windmills_040.jpg",
         user_id = randint(1, x),
     )
@@ -93,6 +98,7 @@ def seed_data():
         title = "Wall 209",
         location = "Paris, France",
         year = 2011,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Paris_209.jpg",
         user_id = randint(1, x),
     )
@@ -102,6 +108,7 @@ def seed_data():
         title = "Dam 10",
         location = "Boise, ID, USA",
         year = 2009,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Boise_010.jpg",
         user_id = randint(1, x),
     )
@@ -111,6 +118,7 @@ def seed_data():
         title = "Brooklyn Navy Yard 070",
         location = "Brooklyn, NY, USA",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/brooklyn_naval_yard070.jpg",
         user_id = randint(1, x),
     )
@@ -120,6 +128,7 @@ def seed_data():
         title = "Joshua Tree 092",
         location = "Joshua Tree NP, CA, USA",
         year = 2009,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/joshua_tree_092.jpg",
         user_id = randint(1, x),
     )
@@ -129,6 +138,7 @@ def seed_data():
         title = "Menara KL Tower 081",
         location = "Kuala Lumpur, Malaysia",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/kuala_lumpur_081.jpg",
         user_id = randint(1, x),
     )
@@ -138,6 +148,7 @@ def seed_data():
         title = "Menara KL Tower 137",
         location = "Kuala Lumpur, Malaysia",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/kuala_lumpur_137.jpg",
         user_id = randint(1, x),
     )
@@ -147,6 +158,7 @@ def seed_data():
         title = "Vending",
         location = "Rochester, NY, USA",
         year = 2006,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/vending1_2.jpg",
         user_id = randint(1, x),
     )
@@ -156,6 +168,7 @@ def seed_data():
         title = "Westminster Arches 1.1",
         location = "Westminster, London, UK",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/westminster_arches1-1.jpg",
         user_id = randint(1, x),
     )
@@ -165,6 +178,7 @@ def seed_data():
         title = "Golden Circle 296",
         location = "Iceland",
         year = 2014,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Golden_Circle_296.jpg",
         user_id = randint(1, x),
     )
@@ -174,6 +188,7 @@ def seed_data():
         title = "White Chair 1c",
         location = "Westminster, London, UK",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/white_chair1c.jpg",
         user_id = randint(1, x),
     )
@@ -183,6 +198,7 @@ def seed_data():
         title = "Macau 080",
         location = "Macau, SAR of PRC",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/macau_080.jpg",
         user_id = randint(1, x),
     )
@@ -192,6 +208,7 @@ def seed_data():
         title = "Kuala Lumpur 101",
         location = "Kuala Lumpur, Malaysia",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/kuala_lumpur_101_crop_symtcl.jpg",
         user_id = randint(1, x),
     )
@@ -201,6 +218,7 @@ def seed_data():
         title = "Golden Circle 210",
         location = "Iceland",
         year = 2014,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Golden_Circle_210.jpg",
         user_id = randint(1, x),
     )
@@ -210,6 +228,7 @@ def seed_data():
         title = "Agra 141",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/Agra_141.jpg",
         user_id = randint(1, x),
     )
@@ -219,6 +238,7 @@ def seed_data():
         title = "Petronas Towers",
         location = "Kuala Lumpur, Malaysia",
         year = 2008,
+        horizontal = False,
         path = "/images/v3000pxLongEdge/kuala_lumpur_075.jpg",
         user_id = randint(1, x),
     )
@@ -226,7 +246,7 @@ def seed_data():
 
     db.session.add_all(mobileW_list)
 
-# seed desktop wallpaper (maybe 30, leaving 6 to add later?)
+# seed desktop wallpaper 
     print("adding Desktop Wallpapers...")
     desktopW_list =[]
 
@@ -234,6 +254,7 @@ def seed_data():
         title = "Seattle 054",
         location = "Seattle, WA, USA",
         year = 2012,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/20120719_Seattle_054.jpg",
         user_id = randint(1, x),
     )
@@ -243,6 +264,7 @@ def seed_data():
         title = "Orchard off i5 003",
         location = "Central CA, USA",
         year = 2013,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/20130307_i5_003.jpg",
         user_id = randint(1, x),
     )
@@ -252,6 +274,7 @@ def seed_data():
         title = "Dune du Pilat 692",
         location = "Dune du Pilat, France",
         year = 2014,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_692.jpg",
         user_id = randint(1, x),
     )
@@ -261,6 +284,7 @@ def seed_data():
         title = "Dune du Pilat 677",
         location = "Dune du Pilat, France",
         year = 2014,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_677.jpg",
         user_id = randint(1, x),
     )
@@ -270,6 +294,7 @@ def seed_data():
         title = "Windmills 63",
         location = "Palm Springs, CA, USA",
         year = 2009,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/windmills_063.jpg",
         user_id = randint(1, x),
     )
@@ -279,6 +304,7 @@ def seed_data():
         title = "Midtown Manhattan from L.I.C",
         location = "Queens, NY, USA",
         year = 2006,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/un_9hrz_1_2.jpg",
         user_id = randint(1, x),
     )
@@ -288,6 +314,7 @@ def seed_data():
         title = "Seattle Space Needle 003",
         location = "Seattle, WA, USA",
         year = 2009,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Seattle_003.jpg",
         user_id = randint(1, x),
     )
@@ -297,6 +324,7 @@ def seed_data():
         title = "Meilen 029",
         location = "Meilen, Switzerland",
         year = 2011,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Meilen_029.jpg",
         user_id = randint(1, x),
     )
@@ -306,6 +334,7 @@ def seed_data():
         title = "Meilen 038",
         location = "Meilen, Switzerland",
         year = 2011,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Meilen_038.jpg",
         user_id = randint(1, x),
     )
@@ -315,6 +344,7 @@ def seed_data():
         title = "macau_105",
         location = "Macau, SAR of PRC",
         year = 2008,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/macau_105.jpg",
         user_id = randint(1, x),
     )
@@ -324,6 +354,7 @@ def seed_data():
         title = "macau_127",
         location = "Macau, SAR of PRC",
         year = 2008,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/macau_127.jpg",
         user_id = randint(1, x),
     )
@@ -333,6 +364,7 @@ def seed_data():
         title = "macau_130",
         location = "Macau, SAR of PRC",
         year = 2006,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/macau_130.jpg",
         user_id = randint(1, x),
     )
@@ -342,6 +374,7 @@ def seed_data():
         title = "hk 319",
         location = "Lantau Island, HK, SAR of PRC",
         year = 2008,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/hk_319.jpg",
         user_id = randint(1, x),
     )
@@ -351,6 +384,7 @@ def seed_data():
         title = "Golden_Circle_339_OG",
         location = "Iceland",
         year = 2014,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Golden_Circle_339_OG.jpg",
         user_id = randint(1, x),
     )
@@ -360,6 +394,7 @@ def seed_data():
         title = "Camel_Safari_350",
         location = "Rajasthan, India",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Camel_Safari_350.jpg",
         user_id = randint(1, x),
     )
@@ -369,6 +404,7 @@ def seed_data():
         title = "Oregon_Coast_032",
         location = "Oregon Coast, USA",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Oregon_Coast_032.jpg",
         user_id = randint(1, x),
     )
@@ -378,6 +414,7 @@ def seed_data():
         title = "Rheinfall_087",
         location = "Switzerland",
         year = 2011,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Rheinfall_087.jpg",
         user_id = randint(1, x),
     )
@@ -387,6 +424,7 @@ def seed_data():
         title = "Agra_275",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Agra_275.jpg",
         user_id = randint(1, x),
     )
@@ -396,6 +434,7 @@ def seed_data():
         title = "Agra_213",
         location = "Agra, Uttar Pradesh, India",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Agra_213.jpg",
         user_id = randint(1, x),
     )
@@ -405,6 +444,7 @@ def seed_data():
         title = "Oregon_Coast_151",
         location = "OR, USA",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Oregon_Coast_151.jpg",
         user_id = randint(1, x),
     )
@@ -414,6 +454,7 @@ def seed_data():
         title = "lndneye1-1",
         location = "London, UK",
         year = 2005,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/lndneye1-1.jpg",
         user_id = randint(1, x),
     )
@@ -423,6 +464,7 @@ def seed_data():
         title = "lib2.1",
         location = "Rochester, NY, USA",
         year = 2008,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/lib2-1.jpg",
         user_id = randint(1, x),
     )
@@ -432,6 +474,7 @@ def seed_data():
         title = "Boise_154",
         location = "Boise, ID, USA",
         year = 2009,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Boise_154.jpg",
         user_id = randint(1, x),
     )
@@ -441,6 +484,7 @@ def seed_data():
         title = "Oregon Coast 017",
         location = "OR, USA",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Oregon_Coast_017.jpg",
         user_id = randint(1, x),
     )
@@ -450,6 +494,7 @@ def seed_data():
         title = "Dune du Pilat 688",
         location = "Dune du Pilat, France",
         year = 2014,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/20140920_Dune_du_Pilat_668.jpg",
         user_id = randint(1, x),
     )
@@ -459,6 +504,7 @@ def seed_data():
         title = "Säntis 036",
         location = "Switzerland",
         year = 2011,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Santis_036.jpg",
         user_id = randint(1, x),
     )
@@ -468,6 +514,7 @@ def seed_data():
         title = "Oregon Coast 026",
         location = "OR, USA",
         year = 2010,
+        horizontal = True,
         path = "/images/h3000pxLongEdge/Oregon_Coast_026.jpg",
         user_id = randint(1, x),
     )
@@ -479,15 +526,28 @@ def seed_data():
     comment_list = []
 
     for i in range(100):
-        c = Comment(
-            name=fake.name().title(),
-            rating=fake.pyint(min_value=0, max_value=5, step=1),
-            comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
-            mobilewallpapers_id=fake.pyint(min_value=0, max_value=len(mobileW_list), step=1),
-            desktopwallpapers_id=fake.pyint(min_value=0, max_value=len(desktopW_list), step=1),
-            user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
-            )
-        users_list.append(c)
+        if i % 2 >=0:
+            c = Comment(
+                name=fake.name().title(),
+                rating=fake.pyint(min_value=0, max_value=5, step=1),
+                comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
+                mobilewallpapers_id=None,
+                desktopwallpapers_id=fake.pyint(min_value=0, max_value=len(desktopW_list), step=1),
+                user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
+                )
+        elif i % 2 == 0:
+            c = Comment(
+                name=fake.name().title(),
+                rating=fake.pyint(min_value=0, max_value=5, step=1),
+                comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
+                mobilewallpapers_id=fake.pyint(min_value=0, max_value=len(mobileW_list), step=1),
+                desktopwallpapers_id=None,
+                user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
+                )
+            
+
+        comment_list.append(c)
+
 
     db.session.add_all(comment_list)
 
