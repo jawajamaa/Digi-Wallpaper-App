@@ -459,7 +459,7 @@ def seed_data():
         title = "Säntis 036",
         location = "Switzerland",
         year = 2011,
-        path = "/images/h3000pxLongEdge/Säntis_036.jpg",
+        path = "/images/h3000pxLongEdge/Santis_036.jpg",
         user_id = randint(1, x),
     )
     desktopW_list.append(desktopW26)
@@ -475,11 +475,21 @@ def seed_data():
 
     db.session.add_all(desktopW_list)
 
-    # print("Coming up with comments to add...")
-    # comment_list = []
+    print("Coming up with comments to add...")
+    comment_list = []
 
-    # for i in range(len(mobileW_list)):
-    #     sentence = fake.
+    for i in range(100):
+        c = Comment(
+            name=fake.name().title(),
+            rating=fake.pyint(min_value=0, max_value=5, step=1),
+            comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
+            mobilewallpapers_id=fake.pyint(min_value=0, max_value=len(mobileW_list), step=1),
+            desktopwallpapers_id=fake.pyint(min_value=0, max_value=len(desktopW_list), step=1),
+            user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
+            )
+        users_list.append(c)
+
+    db.session.add_all(comment_list)
 
 
     db.session.commit()

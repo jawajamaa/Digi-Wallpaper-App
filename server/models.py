@@ -77,8 +77,8 @@ class Comment(db.Model, SerializerMixin):
     rating = db.Column(db.Float)
     comment = db.Column(db.String)
 
-    mobilewallpapers_id = db.Column(db.Integer, db.ForeignKey('mobilewallpapers.id'))
-    desktopwallpapers_id = db.Column(db.Integer, db.ForeignKey('desktopwallpapers.id'))
+    mobilewallpapers_id = db.Column(db.Integer, db.ForeignKey('mobilewallpapers.id'), nullable=True)
+    desktopwallpapers_id = db.Column(db.Integer, db.ForeignKey('desktopwallpapers.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self): f'Comment {self.id} by {self.name} with a rating of {self.rating} out of 5 and the comment {self.comment}'

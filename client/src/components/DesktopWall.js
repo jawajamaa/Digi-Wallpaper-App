@@ -2,7 +2,7 @@ import { Box, ImageList} from "@mui/material";
 import { useContext } from "react";
 
 import { DesktopWallContext } from "../AppContext";
-import DesktopCard from "./DesktopCard";
+import Card from "./Card";
 
 function DesktopWall() {
     const { desktopWallState } = useContext(DesktopWallContext);
@@ -14,9 +14,14 @@ function DesktopWall() {
                 <ImageList variant="masonry" cols={4} gap={8}>
                     {
                         desktopWallState?.map(desktoppaper => (
-                            <DesktopCard 
+                            <Card 
                                 key = { desktoppaper.id }
-                                desktoppaper = { desktoppaper }
+                                id = { desktoppaper.id }
+                                title = { desktoppaper.title }
+                                location = { desktoppaper.location }
+                                year = { desktoppaper.year }
+                                path = { desktoppaper.path }
+                                user_id = { desktoppaper.user_id }
                             />
                         ))
                     }

@@ -2,7 +2,7 @@ import { Box, ImageList } from "@mui/material";
 import { useContext } from "react";
 
 import { MobileWallContext } from "../AppContext";
-import MobileCard from "./MobileCard";
+import Card from "./Card";
 
 function MobileWall() {
     const { mobileWallState } = useContext(MobileWallContext);
@@ -14,10 +14,19 @@ function MobileWall() {
                 <ImageList variant="masonry" cols={4} gap={8}>
                     {
                         mobileWallState?.map(mobilepaper => (
-                            <MobileCard 
+                            <Card 
                                 key = { mobilepaper.id }
-                                mobilepaper = { mobilepaper }
+                                id = { mobilepaper.id }
+                                title = { mobilepaper.title }
+                                location = { mobilepaper.location }
+                                year = { mobilepaper.year }
+                                path = { mobilepaper.path }
+                                user_id = { mobilepaper.user_id }
                             />
+                            // <MobileCard 
+                            //     key = { mobilepaper.id }
+                            //     mobilepaper = { mobilepaper }
+                            // />
                         ))
                     }
                 </ImageList> 

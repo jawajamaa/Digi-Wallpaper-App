@@ -12,6 +12,7 @@ function UpdateUser() {
     const { userState } = useContext(UserContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const [userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
+    const [userUpdated, setUserUpdated ] = useState(null);
     
     const {baseUrl,
         usersRoute
@@ -50,6 +51,7 @@ function UpdateUser() {
                     if (r.ok) {
                         setRefreshState(!refreshState);
                         setUserLookup({"searched": false, "found": null});
+                        setUserUpdated(true);
                         formik.resetForm();
                     }
                 })
@@ -102,7 +104,7 @@ function UpdateUser() {
 
                 {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>User Not found!</p> : null}
                 <SubmitButton label={userLookup.found ? "Update" : "Search"} />
-        
+                {userUpdated ? <p style={{ color:'green'}}>User Updated successfully!</p> : null}
             </form>
         </div>
     );

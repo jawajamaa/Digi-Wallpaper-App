@@ -10,6 +10,7 @@ function DeleteUser() {
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
 
+    const [userFoundDelete, setUserFoundDelete ] = useState(null);
     const [userLookup, setUserLookup ] = useState(WaitingForInput);
 
     const {baseUrl,
@@ -31,6 +32,7 @@ function DeleteUser() {
             let found = userState.find(p => p.username === values.username)
             if (found && found.username === values.username) {
                 setUserLookup(new userFound(found))
+                setUserFoundDelete(true)
             } else {
                 setUserLookup(userNotFound)
             }
@@ -55,7 +57,7 @@ function DeleteUser() {
 
         return (
         <>
-            <p style={{ color:'green'}}> User Found! </p>
+            {userFoundDelete &&  (userFoundDelete ? <p style={{ color:'green'}}> User Found! </p> : <p style={{ color:'green'}}> User Deleted! </p>)}
             <SubmitButton type = "button" onClick = { handleDeleteUser } label = "Delete User" />
         </>);
     }

@@ -1,18 +1,15 @@
 import { ImageListItem } from "@mui/material";
 
 
-function Card({ wallpaper }) {
-    const{
-        id,
-        title,
-        location,
-        year,
-        path,
-        user_id
-    } = wallpaper;
+function Card({ id, title, location, year, path, user_id }) {
+
+
+    console.log(id)
+    console.log(path)
+    console.log(title)
 
     return(
-        <ImageListItem key = {id}>
+        <ImageListItem key = { id }>
             <img 
                 src= { path } 
                 alt= { title } 

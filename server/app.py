@@ -58,6 +58,19 @@ class MobilePapers(Resource):
         )
 api.add_resource(MobilePapers, '/mobilepapers')
 
+class MobilePapersById(Resource):
+
+    def delete(self, id):
+        mp = MobileWallpaper.query.filter_by(id=id).first()
+
+        db.session.delete(mp)
+        db.session.commit()
+
+        return make_response({
+            "Message": "Selected Mobile Wallpaper deleted successfully"
+        }, 202)
+
+api.add_resource(MobilePapersById, '/mobilepapers/<int:id>')
 
 # 2) Desktop view - /desktoppapers
 class DesktopPapers(Resource):
