@@ -23,7 +23,7 @@ const routes = [
                 element: <MobileWall />,
                 children: [
                     {
-                        path: "/mobilewall/id",
+                        path: "/mobilewall/:id",
                         element: <MobileOverlay />
 
                     }

@@ -526,7 +526,7 @@ def seed_data():
     comment_list = []
 
     for i in range(100):
-        if i % 2 >=0:
+        if i % 2 > 0:
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),

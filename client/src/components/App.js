@@ -27,7 +27,7 @@ function App() {
   const[desktopWallState, setDesktopWallState] = useState([]);
   const[userState, setUserState] = useState([]);
   const[refreshState, setRefreshState] = useState(false);
- 
+
 
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
@@ -95,7 +95,7 @@ function App() {
               <RefreshContext.Provider value = { {refreshState, setRefreshState} }>
                 <ServerRoutesContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
                   <UserContext.Provider value = {{ userState, setUserState }}>
-                    <Outlet />
+                    <Outlet/>
                   </UserContext.Provider>
                 </ServerRoutesContext.Provider>
               </RefreshContext.Provider>

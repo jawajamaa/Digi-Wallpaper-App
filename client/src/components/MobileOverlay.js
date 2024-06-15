@@ -8,6 +8,9 @@ function MobileOverlay({
     horizontal,
     path,
     user_id}) {
+    console.log(id)
+    console.log(title)
+    console.log(user_id)
 
     return(
         <Box>
