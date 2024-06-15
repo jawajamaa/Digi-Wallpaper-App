@@ -16,7 +16,7 @@ import Switch from "@mui/material/Switch";
 
 const pages = [
   {name: "Home", url: "/"},
-  {name: "Mobile", url: "/MobileWall"},
+  {name: "Mobile", url: "/mobilewall"},
   {name: "Desktop", url: "/DesktopWall"},
   {name: "Add Wallpaper" ,url: "/AddWallpaper"},
   {name: "User" ,url: "/User"}

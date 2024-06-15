@@ -1,24 +1,34 @@
-import { Box } from "@mui/material";
+import { useContext } from "react";
+import { MobileWallContext } from "../AppContext";
 
-function MobileOverlay({
-    id,
-    title,
-    location,
-    year,
-    horizontal,
-    path,
-    user_id}) {
-    console.log(id)
-    console.log(title)
-    console.log(user_id)
+import { Box } from "@mui/material";
+import { NavLink, useParams } from "react-router-dom";
+import "./MobileOverlay.css";
+
+function MobileOverlay({}) {
+    const { mobileWallState } = useContext(MobileWallContext);
+    let { id } = useParams();
+    id = parseInt(id)
+
+    const foundPaper = mobileWallState.find(paper => paper.id === id)
+
 
     return(
-        <Box>
-            {<img
-                src= { path }
-                alt= { title }
-                />}
-        </Box>
+        <div className = "overlay">
+            <NavLink
+                className="close"
+                to="/mobilewall"
+                >X</NavLink>
+            <div className="content">
+                <Box className="photo">
+                    {<img
+                        src= { foundPaper.path }
+                        alt= { foundPaper.title }
+                        height = { "800" }
+                        />}
+                </Box>
+            </div>
+        </div>
     )
 };
 

@@ -1,0 +1,34 @@
+.overlay {
+    position: fixed;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.overlay .close {
+    font-size: 20pt;
+    position: absolute;
+    right: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.overlay a:visited {
+    color: white;
+}
+
+.overlay .content {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay .content > div {
+    background: black;
+    padding: 25px;
+}

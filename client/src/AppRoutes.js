@@ -21,13 +21,12 @@ const routes = [
             {
                 path: "/mobilewall",
                 element: <MobileWall />,
-                children: [
-                    {
-                        path: "/mobilewall/:id",
-                        element: <MobileOverlay />
 
-                    }
-                ]
+            },
+            {
+                path: "/mobilewall/:id",
+                element: <MobileOverlay />
+
             },
             {
                 path: "/desktopwall",

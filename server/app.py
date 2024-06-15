@@ -60,6 +60,10 @@ api.add_resource(MobilePapers, '/mobilepapers')
 
 class MobilePapersById(Resource):
 
+    def get(self, id):
+        mp = MobileWallpaper.query.filter_by(id=id).first()
+        return make_response( mp, 200 ) 
+
     def delete(self, id):
         mp = MobileWallpaper.query.filter_by(id=id).first()
 
