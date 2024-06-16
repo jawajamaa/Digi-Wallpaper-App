@@ -11,8 +11,12 @@ function MobileOverlay({}) {
     id = parseInt(id)
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
+    const commentArr = foundPaper.users.commentByUser
 
-
+    console.log(commentArr ? (
+        commentArr.map(com => com.comment)) : null)
+    console.log(foundPaper)
+    console.log(foundPaper.users.commentByUser)
     return(
         <div className = "overlay">
             <NavLink
@@ -38,10 +42,13 @@ function MobileOverlay({}) {
                             height = { "800" }
                         />}
                     </Grid>
-                    <Grid item xs="auto">
-                    {/* <Grid item xs={3}> */}
+                    {/* <Grid item xs="auto"> */}
+                    <Grid item xs={3}>
                         <h4>Rating</h4>
                         <h2>Comments</h2>
+                        <p>{commentArr ? (
+                            commentArr.map(com => `${com.comment}\n<br />`)) :
+                            null }</p>
                     </Grid>
                 </Grid>
             </div>

@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 
 function Card({ id, title, location, year, horizontal, path, user_id }) {
     let overlay_route = horizontal ? `/desktopwall/${id}` : `/mobilewall/${id}`
-    console.log(overlay_route)
 
     return(
         <NavLink
