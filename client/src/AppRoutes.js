@@ -1,6 +1,7 @@
 import App from "./components/App";
 import Home from "./components/Home";
 import ErrorPage from "./components/ErrorPage";
+import DesktopOverlay from "./components/DesktopOverlay";
 import DesktopWall from "./components/DesktopWall";
 import MobileOverlay from "./components/MobileOverlay";
 import MobileWall from "./components/MobileWall";
@@ -31,6 +32,11 @@ const routes = [
             {
                 path: "/desktopwall",
                 element: <DesktopWall />
+            },
+            {
+                path: "/desktopwall/:id",
+                element: <DesktopOverlay />
+
             },
             {
                 path: "/addwallpaper",

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MobileWallContext } from "../AppContext";
 
-import { Box } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import "./MobileOverlay.css";
 
@@ -20,13 +20,30 @@ function MobileOverlay({}) {
                 to="/mobilewall"
                 >X</NavLink>
             <div className="content">
-                <Box className="photo">
-                    {<img
-                        src= { foundPaper.path }
-                        alt= { foundPaper.title }
-                        height = { "800" }
+                <Grid container spacing={3}>
+                    {/* <Grid item xs="auto"> */}
+                    <Grid item xs={3}>
+                        <div className="typography">
+                            <Typography>
+                                <h4>{ foundPaper.title }</h4>
+                                <h4>{ foundPaper.location }</h4>
+                                <h4>{ foundPaper.year }</h4>
+                            </Typography>
+                        </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        {<img
+                            src= { foundPaper.path }
+                            alt= { foundPaper.title }
+                            height = { "800" }
                         />}
-                </Box>
+                    </Grid>
+                    <Grid item xs="auto">
+                    {/* <Grid item xs={3}> */}
+                        <h4>Rating</h4>
+                        <h2>Comments</h2>
+                    </Grid>
+                </Grid>
             </div>
         </div>
     )

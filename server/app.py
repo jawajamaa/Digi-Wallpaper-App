@@ -7,7 +7,7 @@ from flask_restful import Resource
 
 from config import app, db, api
 
-from models import User, MobileWallpaper, DesktopWallpaper
+from models import User, MobileWallpaper, DesktopWallpaper, Comment
 
 
 class Home(Resource):
@@ -184,6 +184,31 @@ class UsersbyId(Resource):
 
 api.add_resource(UsersbyId, "/users/<int:id>")
 
+class Comment(Resource):
+
+    def get(self):
+        com = [c.to_dict() for c in Comment.query.all()]
+        return make_response( com, 200 )
+    
+    def post(self):
+        lookUpUser = request.get_json().get("username")
+        user = User.query.filter_by(username=lookUpUser).first()
+
+        new_comment = Comment(
+            name=request.get_json().get("name"),
+            rating=request.get_json().get("rating"),
+            comment=request.get_json().get("comment"),
+            mobilewallpapers_id=request.get_json().get("mobilewallpapers_id"),
+            desktopwallpapers_id=request.get_json().get("desktopwallpapers_id"),
+            user_id=user.id
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return make_response( new_comment.to_dict(), 201 )
+
+api.add_resource(Comment, '/comments' )
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
