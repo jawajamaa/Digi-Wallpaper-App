@@ -21,8 +21,12 @@ class User(db.Model, SerializerMixin):
     desktoppapers = db.relationship(
         'DesktopWallpaper', back_populates='users'
         )
-    
-    serialize_rules = ('-mobilepapers.users','-desktoppapers.users')
+#  Relationship mapping user to their comments
+    commentByUser = db.relationship(
+        'Comment', back_populates='userComents'
+    )
+
+    serialize_rules = ('-mobilepapers.users','-desktoppapers.users', '-commentByUser.userComments')
    
     def __repr__(self):
         return f'User {self.id}, {self.name} username: {self.username} email: {self.email}'
@@ -82,5 +86,11 @@ class Comment(db.Model, SerializerMixin):
     mobilewallpapers_id = db.Column(db.Integer, db.ForeignKey('mobilewallpapers.id'), nullable=True)
     desktopwallpapers_id = db.Column(db.Integer, db.ForeignKey('desktopwallpapers.id'), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+# Relationship mapping comments to the user who submitted them
+    userComents = db.relationship(
+        'User', back_populates='commentByUser'
+    )
+    serialize_rules = ('-userComents.commentByUser',)
 
     def __repr__(self): f'Comment {self.id} by {self.name} with a rating of {self.rating} out of 5 and the comment {self.comment}'

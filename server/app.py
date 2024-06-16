@@ -184,7 +184,7 @@ class UsersbyId(Resource):
 
 api.add_resource(UsersbyId, "/users/<int:id>")
 
-class Comment(Resource):
+class Comments(Resource):
 
     def get(self):
         com = [c.to_dict() for c in Comment.query.all()]
@@ -208,7 +208,7 @@ class Comment(Resource):
 
         return make_response( new_comment.to_dict(), 201 )
 
-api.add_resource(Comment, '/comments' )
+api.add_resource(Comments, '/comments' )
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
