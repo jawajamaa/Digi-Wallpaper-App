@@ -14,7 +14,7 @@ function MobileOverlay({}) {
     const commentArr = foundPaper.users.commentByUser
 
     console.log(commentArr ? (
-        commentArr.map(com => com.comment)) : null)
+        commentArr.map(com => com.name)) : null)
     console.log(foundPaper)
     console.log(foundPaper.users.commentByUser)
     return(
@@ -46,9 +46,11 @@ function MobileOverlay({}) {
                     <Grid item xs={3}>
                         <h4>Rating</h4>
                         <h2>Comments</h2>
-                        <p>{commentArr ? (
-                            commentArr.map(com => `${com.comment}\n<br />`)) :
-                            null }</p>
+                        <ul>
+                            {commentArr ? (commentArr.map(com => (
+                                <li>{com.comment}--{com.name}</li>))) :
+                            null }
+                        </ul>
                     </Grid>
                 </Grid>
             </div>
