@@ -17,6 +17,10 @@
     text-decoration: none;
 }
 
+.overlay .commentLink {
+    text-decoration: none;
+}
+
 .overlay a:visited {
     color: white;
 }

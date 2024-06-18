@@ -8,7 +8,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { MobileWallContext, DesktopWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
+import { MobileWallContext, DesktopWallContext, CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Outlet } from "react-router-dom";
 
@@ -27,6 +27,7 @@ function App() {
   const[desktopWallState, setDesktopWallState] = useState([]);
   const[userState, setUserState] = useState([]);
   const[refreshState, setRefreshState] = useState(false);
+  const[currPaperState, setcurrPaperState] = useState({});
 
 
   // fetch MobileWallpapers (vertical)
@@ -95,7 +96,9 @@ function App() {
               <RefreshContext.Provider value = { {refreshState, setRefreshState} }>
                 <ServerRoutesContext.Provider value = {{ serverRoutesState, setServerRoutesState }}>
                   <UserContext.Provider value = {{ userState, setUserState }}>
-                    <Outlet/>
+                    <CurrPaperContext.Provider value = {{ currPaperState, setcurrPaperState }}>
+                      <Outlet/>
+                    </CurrPaperContext.Provider>
                   </UserContext.Provider>
                 </ServerRoutesContext.Provider>
               </RefreshContext.Provider>

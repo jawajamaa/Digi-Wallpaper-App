@@ -5,7 +5,7 @@ import { Box, Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import "./DesktopOverlay.css";
 
-function DesktopOverlay({}) {
+function DesktopOverlay() {
     const { desktopWallState } = useContext(DesktopWallContext);
     let { id } = useParams();
     id = parseInt(id)

@@ -1,17 +1,23 @@
 import { useContext } from "react";
-import { MobileWallContext } from "../AppContext";
-
 import { Box, Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
+
+import { CurrPaperContext, MobileWallContext } from "../AppContext";
+import SubmitButton from "./SubmitButton"
 import "./MobileOverlay.css";
 
-function MobileOverlay({}) {
+function MobileOverlay() {
     const { mobileWallState } = useContext(MobileWallContext);
+    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
     let { id } = useParams();
     id = parseInt(id)
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
     const commentArr = foundPaper.users.commentByUser
+
+    function handleCurrPaper(){
+        setcurrPaperState(foundPaper)
+    }
 
     console.log(commentArr ? (
         commentArr.map(com => com.name)) : null)
@@ -54,6 +60,13 @@ function MobileOverlay({}) {
                                 </Typography>))) :
                             null }
                         </ul>
+                        {/* create new context that will only have an object of the currently viewed wallpaper to then access in the comment route */}
+                        <NavLink
+                            className = "commentLink"
+                            to = "/makecomment"
+                            >
+                            <SubmitButton type = "button" onClick = { handleCurrPaper }label = "Add your thoughts..."/>
+                        </NavLink>
                     </Grid>
                 </Grid>
             </div>

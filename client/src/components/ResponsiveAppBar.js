@@ -14,9 +14,10 @@ import Switch from "@mui/material/Switch";
 const pages = [
   {name: "Home", url: "/"},
   {name: "Mobile", url: "/mobilewall"},
-  {name: "Desktop", url: "/DesktopWall"},
-  {name: "Add Wallpaper" ,url: "/AddWallpaper"},
-  {name: "User" ,url: "/User"}
+  {name: "Desktop", url: "/desktopwall"},
+  {name: "Add Wallpaper" ,url: "/addwallpaper"},
+  {name: "User" ,url: "/user"},
+  {name: "Make a Comment!" ,url: "/makecomment"}
 ];
 
 function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {

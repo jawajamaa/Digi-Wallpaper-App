@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import ErrorPage from "./components/ErrorPage";
 import DesktopOverlay from "./components/DesktopOverlay";
 import DesktopWall from "./components/DesktopWall";
+import MakeComment from "./components/MakeComment";
 import MobileOverlay from "./components/MobileOverlay";
 import MobileWall from "./components/MobileWall";
 import AddWallAccordion from "./components/AddWallAccordion";
@@ -45,6 +46,10 @@ const routes = [
             {
                 path: "/user",
                 element: <UserAccordion />
+            },
+            {
+                path: "/makecomment",
+                element: <MakeComment />
             }
         ]
     }
