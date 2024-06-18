@@ -39,3 +39,6 @@
     text-align: end;
     /* right: 0; */
 }
+ul {
+    list-style: none;
+}

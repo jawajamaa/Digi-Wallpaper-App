@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MobileWallContext } from "../AppContext";
 
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import "./MobileOverlay.css";
 
@@ -44,11 +44,14 @@ function MobileOverlay({}) {
                     </Grid>
                     {/* <Grid item xs="auto"> */}
                     <Grid item xs={3}>
-                        <h4>Rating</h4>
                         <h2>Comments</h2>
                         <ul>
                             {commentArr ? (commentArr.map(com => (
-                                <li>{com.comment}--{com.name}</li>))) :
+                                <Typography>
+                                    <Rating name="read-only" value={com.rating} readOnly />
+                                    <li>{com.comment}--{com.name}</li>
+                                    <li>_______________________________________________</li>
+                                </Typography>))) :
                             null }
                         </ul>
                     </Grid>

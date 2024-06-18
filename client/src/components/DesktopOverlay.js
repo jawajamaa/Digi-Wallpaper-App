@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DesktopWallContext } from "../AppContext";
 
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import "./DesktopOverlay.css";
 
@@ -11,7 +11,7 @@ function DesktopOverlay({}) {
     id = parseInt(id)
 
     const foundPaper = desktopWallState.find(paper => paper.id === id)
-
+    const commentArr = foundPaper.users.commentByUser
 
     return(
         <div className = "overlay">
@@ -31,8 +31,16 @@ function DesktopOverlay({}) {
                     </Grid>
                     <Grid item xs={3}>
                     {/* <Grid item xs={3}> */}
-                        <h4>Rating</h4>
                         <h2>Comments</h2>
+                        <ul>
+                            {commentArr ? (commentArr.map(com => (
+                                <Typography>
+                                    <Rating name="read-only" value={com.rating} readOnly />
+                                    <li>{com.comment}--{com.name}</li>
+                                    <li>_______________________________________________</li>
+                                </Typography>))) :
+                            null }
+                        </ul>
                     </Grid>
                     <Grid item xs="auto">
                         <div className="typography">
