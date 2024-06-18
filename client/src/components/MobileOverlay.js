@@ -60,7 +60,6 @@ function MobileOverlay() {
                                 </Typography>))) :
                             null }
                         </ul>
-                        {/* create new context that will only have an object of the currently viewed wallpaper to then access in the comment route */}
                         <NavLink
                             className = "commentLink"
                             to = "/makecomment"
