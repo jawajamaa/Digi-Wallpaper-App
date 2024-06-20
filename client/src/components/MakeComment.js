@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Box, Grid, ImageList, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { CommentContext, CurrPaperContext, ServerRoutesContext } from "../AppContext";
+import { CommentContext, CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
@@ -13,7 +13,10 @@ function MakeComment() {
     const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
     // const { desktopWallState } = useContext(DesktopWallContext);
     // const { MobileWallContext } = useContext(MobileWallContext);
+    const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
+    const { userState } = useContext(UserContext);
+    const [comSubmitted, setComSubmitted ] = useState(null);
     const [userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
 
     const {baseUrl,
@@ -38,8 +41,38 @@ function MakeComment() {
             .required("A short comment must accompany the rating ");
     }
 
-
-    console.log(currPaperState)
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            rating: "",
+            comment: "",
+        },
+        validationSchema: Yup.object().shape(schemaFields),
+        onSubmit: (values) => {
+            if (userLookup.found) {
+                fetch((baseUrl + commentsRoute), {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values),
+                }).then(r => {
+                    if (r.ok) {
+                        setRefreshState(!refreshState);
+                        setComSubmitted(true);
+                        setUserLookup({"searched": false, "found": null});
+                        formik.resetForm();
+                    }
+                })
+            } else {
+                let found = userState.find(p => p.username === values.username)
+                console.log(found)
+                formik.values.rating = found?.rating || "";
+                formik.values.comment = found?.comment || "";
+                setUserLookup({"searched": true, "found": found})
+            }
+        }
+    })
 
     return(
         <div className="content">
@@ -65,9 +98,47 @@ function MakeComment() {
                     <Grid item xs={3}>
                         <h2>Share thoughts below</h2>
                         <Box>
-                            <h4>Formik form here</h4>
+                            <h2>Enter Username</h2>
+                                <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+
+                                    <label htmlFor="username">Username</label>
+                                    <br />
+                                    <input 
+                                        id="username"
+                                        name="username"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.username}
+                                    />
+                                    <p style={{ color:'red'}}> {formik.errors.username} </p>
+
+                                    <div style={{display: (userLookup.found) ? "" : "none"}}>
+                                        <label htmlFor="rating">rating</label>
+                                        <br />
+                                        <input 
+                                            id="rating"
+                                            name="rating"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.rating}
+                                        />
+                                        <p style={{ color:'red'}}> {formik.errors.rating} </p>
+                    
+                                    <label htmlFor="comment">Comment</label>
+                                    <br />
+                                    <input 
+                                        id="comment"
+                                        name="comment"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.comment}
+                                    />
+                                    <p style={{ color:'red'}}> {formik.errors.comment} </p>
+                                </div>
+
+                                {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>Username Not found!</p> : null}
+                                <SubmitButton label={userLookup.found ? "Post" : "Search"} />
+                                {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
+                            </form>
                         </Box>
-                            <SubmitButton type = "submit"/>
+                            {/* <SubmitButton type = "submit"/> */}
                     </Grid>
                 </Grid>
             </div>
