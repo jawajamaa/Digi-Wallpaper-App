@@ -1,16 +1,43 @@
 import { useContext } from "react";
 import { Box, Grid, ImageList, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-import { CurrPaperContext } from "../AppContext";
+import { CommentContext, CurrPaperContext, ServerRoutesContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
 function MakeComment() {
+    const { commentState, setCommentState } = useContext(CommentContext);
+    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
     // const { desktopWallState } = useContext(DesktopWallContext);
     // const { MobileWallContext } = useContext(MobileWallContext);
-    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
-    
+    const { serverRoutesState } = useContext(ServerRoutesContext);
+    const [userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
+
+    const {baseUrl,
+        commentsRoute
+    } = serverRoutesState;
+
+    let schemaFields = {
+        username: Yup.string()
+            .min(8, "Username must be at least 8 characters")
+            .required("User must have a username"),
+    };
+    if (userLookup.found) {
+        schemaFields.rating = Yup.number()
+            .positive()
+            .integer()
+            .typeError("Please enter a number") 
+            .lessThan(5)
+            .moreThan(0)
+            .required("Comment must have a rating, even if it is 0");
+        schemaFields.comment = Yup.string()
+            .min(4, "Comment must have at least 4 characters")
+            .required("A short comment must accompany the rating ");
+    }
+
 
     console.log(currPaperState)
 
