@@ -13,7 +13,9 @@ function MobileOverlay() {
     id = parseInt(id)
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
-    const commentArr = foundPaper.users.commentByUser
+    const commentArr = foundPaper?.users.commentByUser
+    console.log(foundPaper)
+    console.log(mobileWallState)
 
     function handleCurrPaper(){
         setcurrPaperState(foundPaper)
@@ -64,7 +66,7 @@ function MobileOverlay() {
                             className = "commentLink"
                             to = "/makecomment"
                             >
-                            <SubmitButton type = "button" onClick = { handleCurrPaper }label = "Add your thoughts..."/>
+                            <SubmitButton type = "button" onClick = { handleCurrPaper } label = "Add your thoughts..."/>
                         </NavLink>
                     </Grid>
                 </Grid>

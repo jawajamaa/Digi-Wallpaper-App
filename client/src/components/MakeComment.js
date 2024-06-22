@@ -16,29 +16,38 @@ function MakeComment() {
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { userState } = useContext(UserContext);
-    const [comSubmitted, setComSubmitted ] = useState(null);
-    const [userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
+    const [ comSubmitted, setComSubmitted ] = useState(null);
+    const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
+    const [ currUser, setCurrUser ] = useState({})
 
     const {baseUrl,
         commentsRoute
     } = serverRoutesState;
 
+    
     let schemaFields = {
         username: Yup.string()
-            .min(8, "Username must be at least 8 characters")
-            .required("User must have a username"),
+        .min(8, "Username must be at least 8 characters")
+        .required("User must have a username"),
     };
     if (userLookup.found) {
         schemaFields.rating = Yup.number()
-            .positive()
-            .integer()
-            .typeError("Please enter a number") 
-            .lessThan(5)
-            .moreThan(0)
-            .required("Comment must have a rating, even if it is 0");
+        .positive()
+        .integer()
+        .typeError("Please enter a number") 
+        .lessThan(6)
+        .moreThan(-1)
+        .required("Comment must have a rating, even if it is 0");
         schemaFields.comment = Yup.string()
-            .min(4, "Comment must have at least 4 characters")
-            .required("A short comment must accompany the rating ");
+        .min(4, "Comment must have at least 4 characters")
+        .required("A short comment must accompany the rating ");
+    }
+    
+    // console.log(currPaperState)
+    // console.log(currPaperState.id)
+// add state created by onChange to username initial values
+    function nonFHandleChange(evt) {
+        console.log(evt.target.value)
     }
 
     const formik = useFormik({
@@ -49,7 +58,20 @@ function MakeComment() {
         },
         validationSchema: Yup.object().shape(schemaFields),
         onSubmit: (values) => {
-            if (userLookup.found) {
+            // use onChange for username?
+            let foundUser = userState.find(p => p.username === values.username)
+            console.log(values)
+            // console.log(foundUser)
+            if (!currPaperState.horizontal) {
+                values.mobilewallpapers_id = currPaperState.id
+                debugger
+                values.name = userLookup.found.name
+            } else {
+                values.desktopwallpapers_id = currPaperState.id
+                values.name = userLookup.found.name
+            }
+            console.log(values)
+            if (userLookup.foundUser) {
                 fetch((baseUrl + commentsRoute), {
                     method: 'POST',
                     headers: {
@@ -65,11 +87,12 @@ function MakeComment() {
                     }
                 })
             } else {
-                let found = userState.find(p => p.username === values.username)
-                console.log(found)
-                formik.values.rating = found?.rating || "";
-                formik.values.comment = found?.comment || "";
-                setUserLookup({"searched": true, "found": found})
+                // let foundUser = userState.find(p => p.username === values.username)
+                // change lines 85 and 86 as foundUser (a single User) does not have those attributes...
+                console.log(foundUser)
+                formik.values.rating = foundUser?.rating || "";
+                formik.values.comment = foundUser?.comment || "";
+                setUserLookup({"searched": true, "found": foundUser})
             }
         }
     })
@@ -91,7 +114,7 @@ function MakeComment() {
                         {<img
                             src= { currPaperState.path }
                             alt= { currPaperState.title }
-                            height = { "800" }
+                            height = { "700" }
                         />}
                     </Grid>
                     {/* <Grid item xs="auto"> */}
@@ -106,7 +129,8 @@ function MakeComment() {
                                     <input 
                                         id="username"
                                         name="username"
-                                        onChange={formik.handleChange}
+                                        onChange={nonFHandleChange}
+                                        // onChange={formik.handleChange}
                                         value={formik.values.username}
                                     />
                                     <p style={{ color:'red'}}> {formik.errors.username} </p>
