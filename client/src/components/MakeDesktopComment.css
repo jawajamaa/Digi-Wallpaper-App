@@ -1,25 +1,24 @@
-.content a:visited {
+/* .content a:visited {
     color: white;
-}
+} */
 
-.content .content {
+/* .content .content {
     margin-top: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
 
-.content .content > div {
+/* .content .content > div {
     background: black;
     padding: 25px;
-}
+} */
 
-.content .typography {
+/* .content .typography {
     position: absolute;
     bottom: 0;
     text-align: start;
-    /* right: 0; */
-}
-ul {
+} */
+/* ul {
     list-style: none;
-}
+} */

@@ -86,73 +86,66 @@ console.log(values)
     })
 
     return(
-        <div className="content">
-                <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        {<img
-                            src= { currPaperState.path }
-                            alt= { currPaperState.title }
-                            height = { "650" }
-                        />}
-                    </Grid>
-                    {/* <Grid item xs="auto"> */}
-                    <Grid item xs={3}>
-                        <h2>Share thoughts below</h2>
-                        <Box>
-                            <h2>Enter Username</h2>
-                                <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
-
-                                    <label htmlFor="username">Username</label>
-                                    <br />
-                                    <input 
-                                        id="username"
-                                        name="username"
-                                        // onChange={nonFHandleChange}
-                                        onChange={formik.handleChange}
-                                        value={formik.values.username}
-                                    />
-                                    <p style={{ color:'red'}}> {formik.errors.username} </p>
-
-                                    <div style={{display: (userLookup.found) ? "" : "none"}}>
-                                        <label htmlFor="rating">rating</label>
-                                        <br />
-                                        <input 
-                                            id="rating"
-                                            name="rating"
-                                            onChange={formik.handleChange}
-                                            value={formik.values.rating}
-                                        />
-                                        <p style={{ color:'red'}}> {formik.errors.rating} </p>
-                    
-                                    <label htmlFor="comment">Comment</label>
-                                    <br />
-                                    <input 
-                                        id="comment"
-                                        name="comment"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.comment}
-                                    />
-                                    <p style={{ color:'red'}}> {formik.errors.comment} </p>
-                                </div>
-
-                                {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>Username Not found!</p> : null}
-                                <SubmitButton label={userLookup.found ? "Post" : "Search"} />
-                                {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
-                            </form>
-                        </Box>
-                    </Grid>
-                    {/* <Grid item xs="auto"> */}
-                    <Grid item xs={3}>
-                        <div className="typography">
-                            <Typography>
-                                <h4>{ currPaperState.title }</h4>
-                                <h4>{ currPaperState.location }</h4>
-                                <h4>{ currPaperState.year }</h4>
-                            </Typography>
-                        </div>
-                    </Grid>
-                </Grid>
-            </div>
+        <Grid container >
+            <Grid item xs={12} sm={9} md={9}>
+                {<img
+                    src= { currPaperState.path }
+                    alt= { currPaperState.title }
+                    height = { "550" }
+                />}
+            </Grid>
+            {/* <Grid item xs="auto"> */}
+            <Grid item xs={12} sm={3} md={3} sx={{mr: 0}}>
+                <h2>Share thoughts below</h2>
+                <h2>Enter Username</h2>
+                    <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+                        <label htmlFor="username">Username</label>
+                        <br />
+                        <input 
+                            id="username"
+                            name="username"
+                            // onChange={nonFHandleChange}
+                            onChange={formik.handleChange}
+                            value={formik.values.username}
+                        />
+                        <p style={{ color:'red'}}> {formik.errors.username} </p>
+                        <div style={{display: (userLookup.found) ? "" : "none"}}>
+                            <label htmlFor="rating">rating</label>
+                            <br />
+                            <input 
+                                id="rating"
+                                name="rating"
+                                onChange={formik.handleChange}
+                                value={formik.values.rating}
+                            />
+                            <p style={{ color:'red'}}> {formik.errors.rating} </p>
+        
+                        <label htmlFor="comment">Comment</label>
+                        <br />
+                        <input 
+                            id="comment"
+                            name="comment"
+                            onChange={formik.handleChange}
+                            value={formik.values.comment}
+                        />
+                        <p style={{ color:'red'}}> {formik.errors.comment} </p>
+                    </div>
+                    {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>Username Not found!</p> : null}
+                    <SubmitButton label={userLookup.found ? "Post" : "Search"} />
+                    {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
+                </form>
+            </Grid>
+            {/* <Grid item xs="auto"> */}
+            <Grid item xs={12} sm={12} md={12}>
+                <div className="typography">
+                    <Typography>
+                        <h4>{ currPaperState.title }</h4>
+                        <h4>{ currPaperState.location }</h4>
+                        <h4>{ currPaperState.year }</h4>
+                    </Typography>
+                </div>
+            </Grid>
+        </Grid>
     )
 };
 export default MakeDesktopComment;
