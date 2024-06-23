@@ -18,7 +18,7 @@ function MakeComment() {
     const { userState } = useContext(UserContext);
     const [ comSubmitted, setComSubmitted ] = useState(null);
     const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    const [ currUser, setCurrUser ] = useState({})
+    // const [ currUser, setCurrUser ] = useState({})
 
     const {baseUrl,
         commentsRoute
@@ -45,10 +45,14 @@ function MakeComment() {
     
     // console.log(currPaperState)
     // console.log(currPaperState.id)
-// add state created by onChange to username initial values
-    function nonFHandleChange(evt) {
-        console.log(evt.target.value)
-    }
+// add state created by onChange to username initial values.  did, however the input captures the value, but it isn't controlled, so the input doesn't show up when entering; only in the console.log...
+    // function nonFHandleChange(evt) {
+    //     console.log(evt.target.value)
+    //     setCurrUser({
+    //         ...currUser,
+    //         [evt.target.name] : evt.target.value
+    //     });
+    // }
 
     const formik = useFormik({
         initialValues: {
@@ -61,17 +65,17 @@ function MakeComment() {
             // use onChange for username?
             let foundUser = userState.find(p => p.username === values.username)
             console.log(values)
-            // console.log(foundUser)
+            console.log(foundUser.name)
             if (!currPaperState.horizontal) {
                 values.mobilewallpapers_id = currPaperState.id
-                debugger
-                values.name = userLookup.found.name
+                // debugger
+                values.name = foundUser.name
             } else {
                 values.desktopwallpapers_id = currPaperState.id
-                values.name = userLookup.found.name
+                values.name = foundUser.name
             }
             console.log(values)
-            if (userLookup.foundUser) {
+            if (userLookup.found) {
                 fetch((baseUrl + commentsRoute), {
                     method: 'POST',
                     headers: {
@@ -129,8 +133,8 @@ function MakeComment() {
                                     <input 
                                         id="username"
                                         name="username"
-                                        onChange={nonFHandleChange}
-                                        // onChange={formik.handleChange}
+                                        // onChange={nonFHandleChange}
+                                        onChange={formik.handleChange}
                                         value={formik.values.username}
                                     />
                                     <p style={{ color:'red'}}> {formik.errors.username} </p>
