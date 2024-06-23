@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import { CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
+import "./MakeDesktopComment.css";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
 function MakeDesktopComment() {
@@ -87,21 +88,11 @@ console.log(values)
     return(
         <div className="content">
                 <Grid container spacing={3}>
-                    {/* <Grid item xs="auto"> */}
-                    <Grid item xs={3}>
-                        <div className="typography">
-                            <Typography>
-                                <h4>{ currPaperState.title }</h4>
-                                <h4>{ currPaperState.location }</h4>
-                                <h4>{ currPaperState.year }</h4>
-                            </Typography>
-                        </div>
-                    </Grid>
                     <Grid item xs={6}>
                         {<img
                             src= { currPaperState.path }
                             alt= { currPaperState.title }
-                            height = { "700" }
+                            height = { "650" }
                         />}
                     </Grid>
                     {/* <Grid item xs="auto"> */}
@@ -149,6 +140,16 @@ console.log(values)
                                 {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
                             </form>
                         </Box>
+                    </Grid>
+                    {/* <Grid item xs="auto"> */}
+                    <Grid item xs={3}>
+                        <div className="typography">
+                            <Typography>
+                                <h4>{ currPaperState.title }</h4>
+                                <h4>{ currPaperState.location }</h4>
+                                <h4>{ currPaperState.year }</h4>
+                            </Typography>
+                        </div>
                     </Grid>
                 </Grid>
             </div>

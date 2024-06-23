@@ -1,0 +1,25 @@
+.content a:visited {
+    color: white;
+}
+
+.content .content {
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .content > div {
+    background: black;
+    padding: 25px;
+}
+
+.content .typography {
+    position: absolute;
+    bottom: 0;
+    text-align: start;
+    /* right: 0; */
+}
+ul {
+    list-style: none;
+}
