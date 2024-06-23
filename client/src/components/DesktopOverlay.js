@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import { CurrPaperContext, DesktopWallContext } from "../AppContext";
 
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import SubmitButton from "./SubmitButton"
 import "./DesktopOverlay.css";
 
 function DesktopOverlay() {
     const { desktopWallState } = useContext(DesktopWallContext);
-    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
+    const { setcurrPaperState } = useContext(CurrPaperContext);
     let { id } = useParams();
     id = parseInt(id)
 
@@ -49,7 +49,7 @@ function DesktopOverlay() {
                         </ul>
                         <NavLink
                             className = "commentLink"
-                            to = "/makecomment"
+                            to = "/makedesktopcomment"
                             >
                             <SubmitButton type = "button" onClick = { handleCurrPaper }label = "Add your thoughts..."/>
                         </NavLink>

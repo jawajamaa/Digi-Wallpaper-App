@@ -24,10 +24,6 @@ function MobileWall() {
                                 path = { mobilepaper.path }
                                 user_id = { mobilepaper.user_id }
                             />
-                            // <MobileCard 
-                            //     key = { mobilepaper.id }
-                            //     mobilepaper = { mobilepaper }
-                            // />
                         ))
                     }
                 </ImageList> 

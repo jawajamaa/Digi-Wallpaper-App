@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Box, Grid, Rating, Typography } from "@mui/material";
+import { Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 
 import { CurrPaperContext, MobileWallContext } from "../AppContext";
@@ -8,7 +8,7 @@ import "./MobileOverlay.css";
 
 function MobileOverlay() {
     const { mobileWallState } = useContext(MobileWallContext);
-    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
+    const { setcurrPaperState } = useContext(CurrPaperContext);
     let { id } = useParams();
     id = parseInt(id)
 
