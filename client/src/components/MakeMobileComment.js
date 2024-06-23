@@ -1,18 +1,16 @@
 import { useContext, useState } from "react";
-import { Box, Grid, ImageList, Typography } from "@mui/material";
-import { NavLink, useParams } from "react-router-dom";
+import { Box, Grid, Typography } from "@mui/material";
+// import { NavLink, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { CommentContext, CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
+import { CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
-function MakeComment() {
-    const { commentState, setCommentState } = useContext(CommentContext);
-    const { currPaperState, setcurrPaperState } = useContext(CurrPaperContext);
-    // const { desktopWallState } = useContext(DesktopWallContext);
-    // const { MobileWallContext } = useContext(MobileWallContext);
+function MakeMobileComment() {
+    // const { commentState, setCommentState } = useContext(CommentContext);
+    const { currPaperState } = useContext(CurrPaperContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { userState } = useContext(UserContext);
@@ -42,17 +40,6 @@ function MakeComment() {
         .min(4, "Comment must have at least 4 characters")
         .required("A short comment must accompany the rating ");
     }
-    
-    // console.log(currPaperState)
-    // console.log(currPaperState.id)
-// add state created by onChange to username initial values.  did, however the input captures the value, but it isn't controlled, so the input doesn't show up when entering; only in the console.log...
-    // function nonFHandleChange(evt) {
-    //     console.log(evt.target.value)
-    //     setCurrUser({
-    //         ...currUser,
-    //         [evt.target.name] : evt.target.value
-    //     });
-    // }
 
     const formik = useFormik({
         initialValues: {
@@ -62,19 +49,17 @@ function MakeComment() {
         },
         validationSchema: Yup.object().shape(schemaFields),
         onSubmit: (values) => {
-            // use onChange for username?
             let foundUser = userState.find(p => p.username === values.username)
             console.log(values)
             console.log(foundUser.name)
             if (!currPaperState.horizontal) {
                 values.mobilewallpapers_id = currPaperState.id
-                // debugger
                 values.name = foundUser.name
             } else {
                 values.desktopwallpapers_id = currPaperState.id
                 values.name = foundUser.name
             }
-            console.log(values)
+console.log(values)
             if (userLookup.found) {
                 fetch((baseUrl + commentsRoute), {
                     method: 'POST',
@@ -92,8 +77,6 @@ function MakeComment() {
                 })
             } else {
                 // let foundUser = userState.find(p => p.username === values.username)
-                // change lines 85 and 86 as foundUser (a single User) does not have those attributes...
-                console.log(foundUser)
                 formik.values.rating = foundUser?.rating || "";
                 formik.values.comment = foundUser?.comment || "";
                 setUserLookup({"searched": true, "found": foundUser})
@@ -166,10 +149,9 @@ function MakeComment() {
                                 {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
                             </form>
                         </Box>
-                            {/* <SubmitButton type = "submit"/> */}
                     </Grid>
                 </Grid>
             </div>
     )
 };
-export default MakeComment;
+export default MakeMobileComment;

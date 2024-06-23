@@ -64,7 +64,7 @@ function MobileOverlay() {
                         </ul>
                         <NavLink
                             className = "commentLink"
-                            to = "/makecomment"
+                            to = "/makemobilecomment"
                             >
                             <SubmitButton type = "button" onClick = { handleCurrPaper } label = "Add your thoughts..."/>
                         </NavLink>

@@ -3,7 +3,8 @@ import Home from "./components/Home";
 import ErrorPage from "./components/ErrorPage";
 import DesktopOverlay from "./components/DesktopOverlay";
 import DesktopWall from "./components/DesktopWall";
-import MakeComment from "./components/MakeComment";
+import MakeDesktopComment from "./components/MakeDesktopComment";
+import MakeMobileComment from "./components/MakeMobileComment";
 import MobileOverlay from "./components/MobileOverlay";
 import MobileWall from "./components/MobileWall";
 import AddWallAccordion from "./components/AddWallAccordion";
@@ -31,6 +32,10 @@ const routes = [
 
             },
             {
+                path: "/makemobilecomment",
+                element: <MakeMobileComment />
+            },
+            {
                 path: "/desktopwall",
                 element: <DesktopWall />
             },
@@ -40,16 +45,16 @@ const routes = [
 
             },
             {
+                path: "/makedesktopcomment",
+                element: <MakeDesktopComment />
+            },
+            {
                 path: "/addwallpaper",
                 element: <AddWallAccordion />
             },
             {
                 path: "/user",
                 element: <UserAccordion />
-            },
-            {
-                path: "/makecomment",
-                element: <MakeComment />
             }
         ]
     }
