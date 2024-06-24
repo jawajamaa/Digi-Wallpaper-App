@@ -24,7 +24,7 @@ function App() {
   const[ toggleDarkMode, setToggleDarkMode ] = useState(true);
   const[ serverRoutesState, setServerRoutesState ] = useState(server_routes);
   const[ commentState, setCommentState ] = useState([]);
-  const[ currPaperState, setcurrPaperState ] = useState({});
+  const[ currPaperState, setCurrPaperState ] = useState({});
   const[ desktopWallState, setDesktopWallState ] = useState([]);
   const[ mobileWallState, setMobileWallState ] = useState([]);
   const[ refreshState, setRefreshState ] = useState(false);
@@ -103,7 +103,7 @@ function App() {
         </header>
         <main>
           <CommentContext.Provider value = { {commentState, setCommentState} }>
-            <CurrPaperContext.Provider value = {{ currPaperState, setcurrPaperState }}>
+            <CurrPaperContext.Provider value = {{ currPaperState, setCurrPaperState }}>
               <DesktopWallContext.Provider value = { {desktopWallState, setDesktopWallState} }>
                 <MobileWallContext.Provider value = { {mobileWallState, setMobileWallState} }>
                   <RefreshContext.Provider value = { {refreshState, setRefreshState} }>

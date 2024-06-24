@@ -8,17 +8,16 @@ import "./MobileOverlay.css";
 
 function MobileOverlay() {
     const { mobileWallState } = useContext(MobileWallContext);
-    const { setcurrPaperState } = useContext(CurrPaperContext);
+    const { setCurrPaperState } = useContext(CurrPaperContext);
     let { id } = useParams();
     id = parseInt(id)
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
     const commentArr = foundPaper?.users.commentByUser
     console.log(foundPaper)
-    console.log(mobileWallState)
 
     function handleCurrPaper(){
-        setcurrPaperState(foundPaper)
+        setCurrPaperState(foundPaper)
     }
 
     console.log(commentArr ? (
@@ -55,7 +54,7 @@ function MobileOverlay() {
                         <h2>Comments</h2>
                         <ul>
                             {commentArr ? (commentArr.map(com => (
-                                <Typography>
+                                <Typography key = {com.id}>
                                     <Rating name="read-only" value={com.rating} readOnly />
                                     <li>{com.comment}--{com.name}</li>
                                     <li>_______________________________________________</li>

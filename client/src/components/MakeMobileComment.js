@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-// import { NavLink, useParams } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -10,19 +10,41 @@ import SubmitButton from "./SubmitButton";
 
 function MakeMobileComment() {
     // const { commentState, setCommentState } = useContext(CommentContext);
-    const { currPaperState } = useContext(CurrPaperContext);
+    const { currPaperState, setCurrPaperState } = useContext(CurrPaperContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { userState } = useContext(UserContext);
     const [ comSubmitted, setComSubmitted ] = useState(null);
     const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    // const [ currUser, setCurrUser ] = useState({})
+    const [ localPaper, setLocalPaper ] = useState({})
 
     const {baseUrl,
         commentsRoute
     } = serverRoutesState;
-
     
+    useEffect(() => {
+        localStorage.setItem("paper", JSON.stringify(currPaperState))
+    }, [currPaperState])
+
+    useEffect(() => {
+        const storeData = localStorage.getItem("paper")
+        console.log(storeData)
+        // limit what is returned from the db.relationships?
+        if (storeData) {
+            try {
+                const parseData = JSON.parse(storeData);
+                setCurrPaperState(parseData)
+            } catch (error) {
+                console.error("Failed to parse stored data:", error);
+                localStorage.removeItem("paper");
+                redirect ('/')
+            }
+        } else {
+            return redirect ('/');
+        }
+    },[]);
+
+
     let schemaFields = {
         username: Yup.string()
         .min(8, "Username must be at least 8 characters")
@@ -83,7 +105,8 @@ console.log(values)
             }
         }
     })
-
+console.log(currPaperState)
+console.log(userLookup)
     return(
         <div className="content">
                 <Grid container spacing={3}>
