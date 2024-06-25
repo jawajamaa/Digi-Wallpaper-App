@@ -4,55 +4,76 @@ import { redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
+import { CurrPaperContext, MobileWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
 function MakeMobileComment() {
     // const { commentState, setCommentState } = useContext(CommentContext);
+    const [comSubmitted, setComSubmitted] = useState(null);
     const { currPaperState, setCurrPaperState } = useContext(CurrPaperContext);
+    const [localPaperState, setLocalPaperState] = useState([])
+    const { mobileWallState } = useContext(MobileWallContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
+    const [userLookup, setUserLookup] = useState({ "searched": false, "found": null});
     const { userState } = useContext(UserContext);
-    const [ comSubmitted, setComSubmitted ] = useState(null);
-    const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    const [ localPaperState, setLocalPaperState ] = useState([])
 
-    const {baseUrl,
-        commentsRoute
-    } = serverRoutesState;
+    const {baseUrl, commentsRoute} = serverRoutesState;
     
+    const isEmptyObject = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+
+    const safeParseJSON = (jsonString) => {
+        try {
+            return JSON.parse(jsonString);
+        } catch (error) {
+            console.error("Failed to parse JSON:", error);
+            return null;
+        }
+    };
+
     useEffect(() => {
         const storedUserData = localStorage.getItem('localPaper');
-        console.log(storedUserData);
-        if (storedUserData) {
-            try {
-                const parseData = JSON.parse(storedUserData);
-                console.log(storedUserData);
-                console.log(parseData);
-                setLocalPaperState(parseData);
-            } catch (error) {
-                console.error("Failed to parse stored data:", error);
-                // localStorage.removeItem('localPaper');  don't need?  
-                return redirect ('/');
-            }
+        if (!isEmptyObject(storedUserData)) {
+                console.log(storedUserData)
+                const parseData = safeParseJSON(storedUserData);
+                if (parseData) {
+                    setLocalPaperState(parseData);
+                } else {
+                    redirect ('/');
+                }
         } else {
-            return redirect ('/');
+            redirect ('/');
         }
     },[]);
-    
+
     useEffect(() => {
         console.log(currPaperState);
-        let localPaper = {};
-        localPaper = Object.keys(currPaperState).filter(objKey =>
-            objKey !== 'users').reduce((newObj, key) => {
-                newObj[key] = currPaperState[key];
-                return newObj
-            }, {}
-        );
-        console.log(localPaper)
-        localStorage.setItem('localPaper', JSON.stringify(localPaper))
-    }, [currPaperState])
+        if (!isEmptyObject(currPaperState)) {
+            const localPaper = Object.keys(currPaperState).filter(objKey =>
+                objKey !== 'users').reduce((newObj, key) => {
+                    newObj[key] = currPaperState[key];
+                    return newObj;
+                }, {});
+            localStorage.setItem('localPaper', JSON.stringify(localPaper))
+            localStorage.setItem('localImgId', JSON.stringify(localPaper.id))
+        } else {
+            const storedImgId = localStorage.getItem('localImgId');
+            if (storedImgId) {
+                const parseImgId = JSON.parse(storedImgId);
+                const foundImg = mobileWallState.find(paper => paper.id === parseImgId)
+                if (foundImg) {
+                    const localPaper = Object.keys(foundImg).filter(objKey =>
+                        objKey !== 'users').reduce((newObj, key) => {
+                            newObj[key] = currPaperState[key];
+                            return newObj
+                        }, {});
+                    localStorage.setItem('localPaper', JSON.stringify(localPaper))
+                    setCurrPaperState(foundImg);
+                }
+            }
+        }
+    }, [currPaperState, mobileWallState, setCurrPaperState])
 
 
 
