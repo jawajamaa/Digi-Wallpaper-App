@@ -16,29 +16,12 @@ function MakeMobileComment() {
     const { userState } = useContext(UserContext);
     const [ comSubmitted, setComSubmitted ] = useState(null);
     const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    // const [ localPaper, setLocalPaper ] = useState([])
+    const [ localPaperState, setLocalPaperState ] = useState([])
 
     const {baseUrl,
         commentsRoute
     } = serverRoutesState;
     
-    useEffect(() => {
-        console.log(currPaperState);
-        console.log(currPaperState.location);
-        console.log(currPaperState.year);
-        // localPaper not accessable in JSX due to scope, but state does not persisit to localStorage, though this plain obj does...
-        let localPaper = {};
-        localPaper = Object.keys(currPaperState).filter(objKey =>
-            objKey !== 'users').reduce((newObj, key) => {
-                newObj[key] = currPaperState[key];
-                return newObj
-            }, {}
-        );
-        
-        console.log(localPaper)
-        localStorage.setItem('localPaper', JSON.stringify(localPaper))
-    }, [currPaperState])
-
     useEffect(() => {
         const storedUserData = localStorage.getItem('localPaper');
         console.log(storedUserData);
@@ -46,7 +29,8 @@ function MakeMobileComment() {
             try {
                 const parseData = JSON.parse(storedUserData);
                 console.log(storedUserData);
-                setCurrPaperState(parseData);
+                console.log(parseData);
+                setLocalPaperState(parseData);
             } catch (error) {
                 console.error("Failed to parse stored data:", error);
                 // localStorage.removeItem('localPaper');  don't need?  
@@ -56,6 +40,20 @@ function MakeMobileComment() {
             return redirect ('/');
         }
     },[]);
+    
+    useEffect(() => {
+        console.log(currPaperState);
+        let localPaper = {};
+        localPaper = Object.keys(currPaperState).filter(objKey =>
+            objKey !== 'users').reduce((newObj, key) => {
+                newObj[key] = currPaperState[key];
+                return newObj
+            }, {}
+        );
+        console.log(localPaper)
+        localStorage.setItem('localPaper', JSON.stringify(localPaper))
+    }, [currPaperState])
+
 
 
     let schemaFields = {
@@ -118,6 +116,7 @@ console.log(values)
             }
         }
     })
+console.log(localPaperState)
 console.log(currPaperState)
 console.log(userLookup)
     return(
@@ -127,16 +126,16 @@ console.log(userLookup)
                     <Grid item xs={3}>
                         <div className="typography">
                             <Typography>
-                                <h4>{ currPaperState.title || localPaper.title }</h4>
-                                <h4>{ currPaperState.location || localPaper.location }</h4>
-                                <h4>{ currPaperState.year || localPaper.year }</h4>
+                                <h4>{ currPaperState.title || localPaperState.title }</h4>
+                                <h4>{ currPaperState.location || localPaperState.location }</h4>
+                                <h4>{ currPaperState.year || localPaperState.year }</h4>
                             </Typography>
                         </div>
                     </Grid>
                     <Grid item xs={6}>
                         {<img
-                            src= { currPaperState.path || localPaper.path }
-                            alt= { currPaperState.title || localPaper.title }
+                            src= { currPaperState.path || localPaperState.path }
+                            alt= { currPaperState.title || localPaperState.title }
                             height = { "700" }
                         />}
                     </Grid>
