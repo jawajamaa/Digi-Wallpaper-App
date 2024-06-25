@@ -16,28 +16,41 @@ function MakeMobileComment() {
     const { userState } = useContext(UserContext);
     const [ comSubmitted, setComSubmitted ] = useState(null);
     const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    const [ localPaper, setLocalPaper ] = useState({})
+    // const [ localPaper, setLocalPaper ] = useState([])
 
     const {baseUrl,
         commentsRoute
     } = serverRoutesState;
     
     useEffect(() => {
-        localStorage.setItem("paper", JSON.stringify(currPaperState))
+        console.log(currPaperState);
+        console.log(currPaperState.location);
+        console.log(currPaperState.year);
+        // localPaper not accessable in JSX due to scope, but state does not persisit to localStorage, though this plain obj does...
+        let localPaper = {};
+        localPaper = Object.keys(currPaperState).filter(objKey =>
+            objKey !== 'users').reduce((newObj, key) => {
+                newObj[key] = currPaperState[key];
+                return newObj
+            }, {}
+        );
+        
+        console.log(localPaper)
+        localStorage.setItem('localPaper', JSON.stringify(localPaper))
     }, [currPaperState])
 
     useEffect(() => {
-        const storeData = localStorage.getItem("paper")
-        console.log(storeData)
-        // limit what is returned from the db.relationships?
-        if (storeData) {
+        const storedUserData = localStorage.getItem('localPaper');
+        console.log(storedUserData);
+        if (storedUserData) {
             try {
-                const parseData = JSON.parse(storeData);
-                setCurrPaperState(parseData)
+                const parseData = JSON.parse(storedUserData);
+                console.log(storedUserData);
+                setCurrPaperState(parseData);
             } catch (error) {
                 console.error("Failed to parse stored data:", error);
-                localStorage.removeItem("paper");
-                redirect ('/')
+                // localStorage.removeItem('localPaper');  don't need?  
+                return redirect ('/');
             }
         } else {
             return redirect ('/');
@@ -114,16 +127,16 @@ console.log(userLookup)
                     <Grid item xs={3}>
                         <div className="typography">
                             <Typography>
-                                <h4>{ currPaperState.title }</h4>
-                                <h4>{ currPaperState.location }</h4>
-                                <h4>{ currPaperState.year }</h4>
+                                <h4>{ currPaperState.title || localPaper.title }</h4>
+                                <h4>{ currPaperState.location || localPaper.location }</h4>
+                                <h4>{ currPaperState.year || localPaper.year }</h4>
                             </Typography>
                         </div>
                     </Grid>
                     <Grid item xs={6}>
                         {<img
-                            src= { currPaperState.path }
-                            alt= { currPaperState.title }
+                            src= { currPaperState.path || localPaper.path }
+                            alt= { currPaperState.title || localPaper.title }
                             height = { "700" }
                         />}
                     </Grid>
