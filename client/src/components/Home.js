@@ -19,19 +19,14 @@ function Home(){
 
 
     return(
-        <Container>
-            <Box 
-                // alignItems="center"
-                // sx={{ height: '100vh'}}
-                >
-                {randomWallState && (
-                    <img
-                        src = {randomWallState.path}
-                        alt = {randomWallState.title}
-                        width = { "1200" }
-                        />
-                )}
-            </Box>
+        <Container disableGutters fixed={false} maxWidth="xl">
+            {randomWallState && (
+                <img
+                    src = {randomWallState.path}
+                    alt = {randomWallState.title}
+                    width = { "1150" }
+                    />
+            )}
         </Container>
     );
 }
