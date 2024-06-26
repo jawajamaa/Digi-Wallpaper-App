@@ -6,11 +6,9 @@ import * as Yup from "yup";
 
 import { CurrPaperContext, MobileWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
-// import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
 
 function MakeMobileComment() {
-    // const { commentState, setCommentState } = useContext(CommentContext);
     const [comSubmitted, setComSubmitted] = useState(null);
     const { currPaperState, setCurrPaperState } = useContext(CurrPaperContext);
     const [localPaperState, setLocalPaperState] = useState([])
@@ -36,7 +34,6 @@ function MakeMobileComment() {
     useEffect(() => {
         const storedUserData = localStorage.getItem('localPaper');
         if (!isEmptyObject(storedUserData)) {
-                console.log(storedUserData)
                 const parseData = safeParseJSON(storedUserData);
                 if (parseData) {
                     setLocalPaperState(parseData);
@@ -49,7 +46,6 @@ function MakeMobileComment() {
     },[]);
 
     useEffect(() => {
-        console.log(currPaperState);
         if (!isEmptyObject(currPaperState)) {
             const localPaper = Object.keys(currPaperState).filter(objKey =>
                 objKey !== 'users').reduce((newObj, key) => {
@@ -129,7 +125,6 @@ console.log(values)
                     }
                 })
             } else {
-                // let foundUser = userState.find(p => p.username === values.username)
                 formik.values.rating = foundUser?.rating || "";
                 formik.values.comment = foundUser?.comment || "";
                 setUserLookup({"searched": true, "found": foundUser})
@@ -140,7 +135,6 @@ console.log(values)
     return(
         <div className="content">
                 <Grid container spacing={3}>
-                    {/* <Grid item xs="auto"> */}
                     <Grid item xs={3}>
                         <div className="typography">
                             <Typography>
@@ -157,7 +151,6 @@ console.log(values)
                             height = { "700" }
                         />}
                     </Grid>
-                    {/* <Grid item xs="auto"> */}
                     <Grid item xs={3}>
                         <h2>Share thoughts below</h2>
                         <Box>

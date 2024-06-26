@@ -10,7 +10,6 @@ import "./MakeDesktopComment.css";
 
 
 function MakeDesktopComment() {
-    // const { commentState, setCommentState } = useContext(CommentContext);
     const [comSubmitted, setComSubmitted] = useState(null);
     const { currPaperState, setCurrPaperState } = useContext(CurrPaperContext);
     const { desktopWallState } = useContext(DesktopWallContext);
@@ -36,7 +35,6 @@ function MakeDesktopComment() {
     useEffect(() => {
         const storedUserData = localStorage.getItem('localPaper');
         if (!isEmptyObject(storedUserData)) {
-                console.log(storedUserData)
                 const parseData = safeParseJSON(storedUserData);
                 if (parseData) {
                     setLocalPaperState(parseData);
@@ -112,7 +110,7 @@ function MakeDesktopComment() {
                 values.mobilewallpapers_id = currPaperState.id
                 values.name = foundUser.name
             }
-console.log(values)
+
             if (userLookup.found) {
                 fetch((baseUrl + commentsRoute), {
                     method: 'POST',
@@ -129,7 +127,6 @@ console.log(values)
                     }
                 })
             } else {
-                // let foundUser = userState.find(p => p.username === values.username)
                 formik.values.rating = foundUser?.rating || "";
                 formik.values.comment = foundUser?.comment || "";
                 setUserLookup({"searched": true, "found": foundUser})
@@ -146,7 +143,6 @@ console.log(values)
                     height = { "550" }
                 />}
             </Grid>
-            {/* <Grid item xs="auto"> */}
             <Grid item xs={12} sm={3} md={3} sx={{mr: 0}}>
                 <h2>Share thoughts below</h2>
                 <h2>Enter Username</h2>
@@ -186,7 +182,6 @@ console.log(values)
                     {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
                 </form>
             </Grid>
-            {/* <Grid item xs="auto"> */}
             <Grid item xs={12} sm={12} md={12}>
                 <div className="typography">
                     <Typography>

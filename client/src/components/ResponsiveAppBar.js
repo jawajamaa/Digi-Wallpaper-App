@@ -17,7 +17,7 @@ const pages = [
   {name: "Desktop", url: "/desktopwall"},
   {name: "Add Wallpaper" ,url: "/addwallpaper"},
   {name: "User" ,url: "/user"},
-  {name: "Make a Comment!" ,url: "/makecomment"}
+  // {name: "Make a Comment!" ,url: "/makecomment"}
 ];
 
 function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {

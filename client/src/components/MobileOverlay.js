@@ -14,16 +14,11 @@ function MobileOverlay() {
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
     const commentArr = foundPaper?.users.commentByUser
-    console.log(foundPaper)
 
     function handleCurrPaper(){
         setCurrPaperState(foundPaper)
     }
 
-    console.log(commentArr ? (
-        commentArr.map(com => com.name)) : null)
-    console.log(foundPaper)
-    console.log(foundPaper.users.commentByUser)
     return(
         <div className = "overlay">
             <NavLink
@@ -32,7 +27,6 @@ function MobileOverlay() {
                 >X</NavLink>
             <div className="content">
                 <Grid container spacing={3}>
-                    {/* <Grid item xs="auto"> */}
                     <Grid item xs={3}>
                         <div className="typography">
                             <Typography>
@@ -49,7 +43,6 @@ function MobileOverlay() {
                             height = { "800" }
                         />}
                     </Grid>
-                    {/* <Grid item xs="auto"> */}
                     <Grid item xs={3}>
                         <h2>Comments</h2>
                         <ul>

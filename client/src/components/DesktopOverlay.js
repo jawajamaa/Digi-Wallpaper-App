@@ -27,7 +27,6 @@ function DesktopOverlay() {
                 >X</NavLink>
             <div className="content">
                 <Grid container spacing={3}>
-                    {/* <Grid item xs="auto"> */}
                     <Grid item xs={9}>
                         {<img
                             src= { foundPaper.path }
@@ -36,7 +35,6 @@ function DesktopOverlay() {
                         />}
                     </Grid>
                     <Grid item xs={3}>
-                    {/* <Grid item xs={3}> */}
                         <h2>Comments</h2>
                         <ul>
                             {commentArr ? (commentArr.map(com => (
