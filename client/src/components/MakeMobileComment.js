@@ -8,6 +8,7 @@ import { CurrPaperContext, MobileWallContext, RefreshContext, ServerRoutesContex
 import SubmitButton from "./SubmitButton";
 // import { MobileWallContext, DesktopWallContext } from "../AppContext";
 
+
 function MakeMobileComment() {
     // const { commentState, setCommentState } = useContext(CommentContext);
     const [comSubmitted, setComSubmitted] = useState(null);
@@ -75,8 +76,6 @@ function MakeMobileComment() {
         }
     }, [currPaperState, mobileWallState, setCurrPaperState])
 
-
-
     let schemaFields = {
         username: Yup.string()
         .min(8, "Username must be at least 8 characters")
@@ -137,9 +136,7 @@ console.log(values)
             }
         }
     })
-console.log(localPaperState)
-console.log(currPaperState)
-console.log(userLookup)
+
     return(
         <div className="content">
                 <Grid container spacing={3}>
@@ -172,7 +169,6 @@ console.log(userLookup)
                                     <input 
                                         id="username"
                                         name="username"
-                                        // onChange={nonFHandleChange}
                                         onChange={formik.handleChange}
                                         value={formik.values.username}
                                     />

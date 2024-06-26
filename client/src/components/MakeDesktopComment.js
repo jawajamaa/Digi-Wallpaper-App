@@ -1,29 +1,81 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-// import { NavLink, useParams } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { CurrPaperContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
+import { CurrPaperContext, DesktopWallContext, RefreshContext, ServerRoutesContext, UserContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 import "./MakeDesktopComment.css";
-// import { MobileWallContext, DesktopWallContext } from "../AppContext";
+
 
 function MakeDesktopComment() {
     // const { commentState, setCommentState } = useContext(CommentContext);
-    const { currPaperState } = useContext(CurrPaperContext);
+    const [comSubmitted, setComSubmitted] = useState(null);
+    const { currPaperState, setCurrPaperState } = useContext(CurrPaperContext);
+    const { desktopWallState } = useContext(DesktopWallContext);
+    const [localPaperState, setLocalPaperState] = useState([])
     const { refreshState, setRefreshState } = useContext(RefreshContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
+    const [userLookup, setUserLookup] = useState({ "searched": false, "found": null});
     const { userState } = useContext(UserContext);
-    const [ comSubmitted, setComSubmitted ] = useState(null);
-    const [ userLookup, setUserLookup ] = useState({ "searched": false, "found": null});
-    // const [ currUser, setCurrUser ] = useState({})
 
-    const {baseUrl,
-        commentsRoute
-    } = serverRoutesState;
+    const {baseUrl, commentsRoute} = serverRoutesState;
 
-    
+    const isEmptyObject = (obj) => Object.keys(obj).length === 0 && obj.constructor === Object;
+
+    const safeParseJSON = (jsonString) => {
+        try {
+            return JSON.parse(jsonString);
+        } catch (error) {
+            console.error("Failed to parse JSON:", error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const storedUserData = localStorage.getItem('localPaper');
+        if (!isEmptyObject(storedUserData)) {
+                console.log(storedUserData)
+                const parseData = safeParseJSON(storedUserData);
+                if (parseData) {
+                    setLocalPaperState(parseData);
+                } else {
+                    redirect ('/');
+                }
+        } else {
+            redirect ('/');
+        }
+    },[]);
+
+    useEffect(() => {
+        console.log(currPaperState);
+        if (!isEmptyObject(currPaperState)) {
+            const localPaper = Object.keys(currPaperState).filter(objKey =>
+                objKey !== 'users').reduce((newObj, key) => {
+                    newObj[key] = currPaperState[key];
+                    return newObj;
+                }, {});
+            localStorage.setItem('localPaper', JSON.stringify(localPaper))
+            localStorage.setItem('localImgId', JSON.stringify(localPaper.id))
+        } else {
+            const storedImgId = localStorage.getItem('localImgId');
+            if (storedImgId) {
+                const parseImgId = JSON.parse(storedImgId);
+                const foundImg = desktopWallState.find(paper => paper.id === parseImgId)
+                if (foundImg) {
+                    const localPaper = Object.keys(foundImg).filter(objKey =>
+                        objKey !== 'users').reduce((newObj, key) => {
+                            newObj[key] = currPaperState[key];
+                            return newObj
+                        }, {});
+                    localStorage.setItem('localPaper', JSON.stringify(localPaper))
+                    setCurrPaperState(foundImg);
+                }
+            }
+        }
+    }, [currPaperState, desktopWallState, setCurrPaperState])
+
     let schemaFields = {
         username: Yup.string()
         .min(8, "Username must be at least 8 characters")
@@ -89,8 +141,8 @@ console.log(values)
         <Grid container >
             <Grid item xs={12} sm={9} md={9}>
                 {<img
-                    src= { currPaperState.path }
-                    alt= { currPaperState.title }
+                    src= { currPaperState.path || localPaperState.path }
+                    alt= { currPaperState.title || localPaperState.title }
                     height = { "550" }
                 />}
             </Grid>
@@ -104,7 +156,6 @@ console.log(values)
                         <input 
                             id="username"
                             name="username"
-                            // onChange={nonFHandleChange}
                             onChange={formik.handleChange}
                             value={formik.values.username}
                         />
@@ -139,9 +190,9 @@ console.log(values)
             <Grid item xs={12} sm={12} md={12}>
                 <div className="typography">
                     <Typography>
-                        <h4>{ currPaperState.title }</h4>
-                        <h4>{ currPaperState.location }</h4>
-                        <h4>{ currPaperState.year }</h4>
+                        <h4>{ currPaperState.title || localPaperState.title }</h4>
+                        <h4>{ currPaperState.location || localPaperState.location }</h4>
+                        <h4>{ currPaperState.year || localPaperState.year }</h4>
                     </Typography>
                 </div>
             </Grid>

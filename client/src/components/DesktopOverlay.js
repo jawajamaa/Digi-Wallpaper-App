@@ -8,7 +8,7 @@ import "./DesktopOverlay.css";
 
 function DesktopOverlay() {
     const { desktopWallState } = useContext(DesktopWallContext);
-    const { setcurrPaperState } = useContext(CurrPaperContext);
+    const { setCurrPaperState } = useContext(CurrPaperContext);
     let { id } = useParams();
     id = parseInt(id)
 
@@ -16,7 +16,7 @@ function DesktopOverlay() {
     const commentArr = foundPaper.users.commentByUser
 
     function handleCurrPaper(){
-        setcurrPaperState(foundPaper)
+        setCurrPaperState(foundPaper)
     }
 
     return(
