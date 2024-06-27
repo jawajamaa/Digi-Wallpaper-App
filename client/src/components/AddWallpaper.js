@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Field, useFormik } from "formik";
+import { ErrorMessage, Field, useFormik } from "formik";
 import * as Yup from "yup";
 import { Typography } from "@mui/material";
 
@@ -103,8 +103,19 @@ function AddWallpaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
 
-                <div id="my-radio-group">Horizontal?</div>
-                <div role="group" aria-labelledby="my-radio-group">
+                <label htmlFor="horizontal">Image Orientation</label>
+                <input 
+                    id='select'
+                    component='select' 
+                    name = 'horizontal' 
+                    placeholder='select options'
+                    >
+                    <option value={formik.values.horizontal}>Mobile (Vertical)</option>
+                    <option value={formik.values.horizontal}>Desktop (Horizontal)</option>
+                </input>      
+                <p style={{ color:'red'}}> {formik.errors.horizontal} </p>                          
+                {/* <div id="my-radio-group">Horizontal?</div> */}
+                {/* <div role="group" aria-labelledby="my-radio-group">
                   <label>
                     <Field type="radio" name="horizontal" value="Yes" />
                     <Typography>
@@ -118,7 +129,8 @@ function AddWallpaper() {
                     </Typography>
                   </label>
                   <div>Horizontal? {formik.values.horizontal}</div>
-                </div>
+                </div> */}
+
                 <label htmlFor="username"> Username </label>
                 <br />
                 <input
