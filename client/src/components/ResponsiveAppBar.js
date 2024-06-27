@@ -92,7 +92,7 @@ function ResponsiveAppBar({ toggleDarkMode, toggleDarkTheme }) {
             <Typography>
                 <h3>Dark Mode</h3>
             </Typography>
-            <Switch checked={toggleDarkMode} onChange={toggleDarkTheme} />
+            <Switch color={"secondary"} checked={toggleDarkMode} onChange={toggleDarkTheme} />
           </Box>
         </Toolbar>
       </Container>

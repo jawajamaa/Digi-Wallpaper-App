@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
-import { useFormik } from "formik";
+import { Field, useFormik } from "formik";
 import * as Yup from "yup";
+import { Typography } from "@mui/material";
 
 import { RefreshContext, ServerRoutesContext } from "../AppContext";
 
 import SubmitButton from "./SubmitButton";
 
-function AddDesktopPaper() {
+function AddWallpaper() {
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
@@ -26,6 +27,8 @@ function AddDesktopPaper() {
         url: Yup.string()
             .url("Image url must be string")
             .required("Image must have a url or a path from which to be loaded"),
+        horizontal: Yup.string()
+            .required("Image must have one aspect ratio or orientation selected"),
         username: Yup.string()
             .min(8, "Username must be at least 8 characters")      
     });
@@ -36,6 +39,7 @@ function AddDesktopPaper() {
             year: "",
             location: "",
             url: "",
+            horizontal: "",
             username: ""
         },
         validationSchema: formSchema,
@@ -56,10 +60,10 @@ function AddDesktopPaper() {
 
     return(
         <div>
-            <h2>Desktop (Horizontal) Wallpaper additions go here!</h2>
+            <h2> Wallpaper Additions go here!</h2>
             <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
 
-                <label htmlfor="title">Image Title</label>
+                <label htmlFor="title">Image Title</label>
                 <br />
                 <input 
                     id="title"
@@ -69,7 +73,7 @@ function AddDesktopPaper() {
                 />
                 <p style={{ color:'red' }}> {formik.errors.title} </p>
 
-                <label htmlfor="year">Year Image taken</label>
+                <label htmlFor="year">Year Image taken</label>
                 <br />
                 <input
                     id="year"
@@ -79,7 +83,7 @@ function AddDesktopPaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.year} </p>
 
-                <label htmlfor="location">Location Image taken</label>
+                <label htmlFor="location">Location Image taken</label>
                 <br />
                 <input
                     id="location"
@@ -89,7 +93,7 @@ function AddDesktopPaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.location} </p>
 
-                <label htmlfor="url">Image Url</label>
+                <label htmlFor="url">Image Url</label>
                 <br />
                 <input
                     id="url"
@@ -99,7 +103,23 @@ function AddDesktopPaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
 
-                <label htmlfor="username"> Username </label>
+                <div id="my-radio-group">Horizontal?</div>
+                <div role="group" aria-labelledby="my-radio-group">
+                  <label>
+                    <Field type="radio" name="horizontal" value="Yes" />
+                    <Typography>
+                        Yes
+                    </Typography>
+                  </label>
+                  <label>
+                    <Field type="radio" name="horizontal" value="No" />
+                    <Typography>
+                        No
+                    </Typography>
+                  </label>
+                  <div>Horizontal? {formik.values.horizontal}</div>
+                </div>
+                <label htmlFor="username"> Username </label>
                 <br />
                 <input
                     id="username"
@@ -115,4 +135,4 @@ function AddDesktopPaper() {
     );
 }
 
-export default AddDesktopPaper;
+export default AddWallpaper;

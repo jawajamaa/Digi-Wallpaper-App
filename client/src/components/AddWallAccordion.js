@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import AddMobilePaper from "./AddMobilePaper"
 import AddDesktopPaper from "./AddDesktopPaper"
+import AddWallpaper from "./AddWallpaper"
 
 // NOTE: this component imported from MUI for styling with small changes
 // //////////////////////////////////////////////////////////////////////
@@ -63,7 +64,8 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <AddMobilePaper />
+            <AddWallpaper />
+            {/* <AddMobilePaper /> */}
           </Typography>
         </AccordionDetails>
       </Accordion>
