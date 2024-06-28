@@ -44,6 +44,7 @@ class MobilePapers(Resource):
             year=request.get_json().get("year"),
             location=request.get_json().get("location"),
             path=request.get_json().get("url"),
+            horizontal=request.get_json().get("horizontal"),
             user_id = user.id
         )
         
