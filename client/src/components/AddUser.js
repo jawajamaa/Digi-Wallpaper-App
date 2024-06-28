@@ -98,7 +98,7 @@ function AddUser() {
                 <p style={{ color:'red'}}> {formik.errors.email} </p>
 
                 {!userTaken.searched ? null :  userTaken.taken ? <p style={{ color:'red'}}> Username already taken - Please choose a different Username</p>  : null}
-                {refreshState ? <p style={{ color:'red'}}> New User Submitted! </p> : null}
+                {refreshState ? <p style={{ color:'green'}}> New User Submitted! </p> : null}
                 <SubmitButton />
             </form>
         </div>

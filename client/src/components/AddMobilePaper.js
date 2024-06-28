@@ -29,7 +29,7 @@ function AddMobilePaper() {
         url: Yup.string()
             .url("Image url must be string")
             .required("Image must have a url or a path from which to be loaded"),
-        horizontal: Yup.boolean(),
+        // horizontal: Yup.boolean(),
         username: Yup.string()
             .min(8, "Username must be at least 8 characters")      
     });
@@ -106,7 +106,7 @@ function AddMobilePaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
 
-                <label htmlfor="horizontal">Check box if Image is Horizontal</label>
+                {/* <label htmlfor="horizontal">Check box if Image is Horizontal</label>
                 <br />
                 <input
                     id="horizontal"
@@ -116,7 +116,7 @@ function AddMobilePaper() {
                     onChange={formik.handleChange}
                     checked={formik.values.horizontal ? "checked" : ""}
                 />
-                <p style={{ color:'red'}}> {formik.errors.horizontal} </p>
+                <p style={{ color:'red'}}> {formik.errors.horizontal} </p> */}
 
                 <label htmlfor="username"> Username </label>
                 <br />

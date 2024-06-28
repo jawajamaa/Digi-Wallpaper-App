@@ -32,7 +32,7 @@ function DeleteUser() {
             let found = userState.find(p => p.username === values.username)
             if (found && found.username === values.username) {
                 setUserLookup(new userFound(found))
-                setUserFoundDelete(true)
+                // setUserFoundDelete(true)
             } else {
                 setUserLookup(userNotFound)
             }
@@ -44,20 +44,27 @@ function DeleteUser() {
     }
     
     function userFound(foundUser) {
+        // setUserFoundDelete(true)
         function handleDeleteUser() {
             fetch((`${baseUrl}${usersRoute}/${foundUser.id}`), {
                 method: 'DELETE'
             }).then(r => r.json())
             .then(r => {
-                if (r.ok) {
+                console.log(r)
+                if (r.status === 202) {
                     setRefreshState(!refreshState)
+                    setUserFoundDelete(true)
+                    console.log(r)
                 }
             })
         };
+        console.log(refreshState)
+        console.log(userFoundDelete)
 
         return (
         <>
-            {userFoundDelete &&  (userFoundDelete ? <p style={{ color:'green'}}> User Found! </p> : <p style={{ color:'green'}}> User Deleted! </p>)}
+            {userFoundDelete ? <p style={{ color:'red'}}> User Deleted! </p> : <p style={{ color:'green'}}> User Found - Delete? </p>}
+            {/* {userFoundDelete &&  (userFoundDelete ? <p style={{ color:'green'}}> User Found! </p> : <p style={{ color:'green'}}> User Deleted! </p>)} */}
             <SubmitButton type = "button" onClick = { handleDeleteUser } label = "Delete User" />
         </>);
     }

@@ -103,6 +103,7 @@ function UpdateUser() {
                 </div>
 
                 {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>User Not found!</p> : null}
+                {userLookup.searched && userLookup.found ? <p style={{ color:'green'}}>User Found!</p> : null}
                 <SubmitButton label={userLookup.found ? "Update" : "Search"} />
                 {userUpdated ? <p style={{ color:'green'}}>User Updated successfully!</p> : null}
             </form>
