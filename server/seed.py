@@ -538,7 +538,7 @@ def seed_data():
             comment_list.append(c)
 
     for id in range(len(mobileW_list)):
-        for i in range(fake.pyint(min_value=1, max_value=3, step=1)):
+        for i    in range(fake.pyint(min_value=1, max_value=3, step=1)):
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),
@@ -548,6 +548,8 @@ def seed_data():
                 user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
             )
             comment_list.append(c)
+
+    db.session.add_all(comment_list)
 
     db.session.commit()
     print("Database seed complete - now it's entirely up to you!")

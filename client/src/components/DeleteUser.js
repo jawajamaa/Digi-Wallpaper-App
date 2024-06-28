@@ -51,6 +51,7 @@ function DeleteUser() {
             }).then(r => r.json())
             .then(r => {
                 console.log(r)
+                console.log(r.status)
                 if (r.status === 202) {
                     setRefreshState(!refreshState)
                     setUserFoundDelete(true)
