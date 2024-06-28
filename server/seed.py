@@ -525,32 +525,29 @@ def seed_data():
     print("Coming up with comments to add...")
     comment_list = []
 
-    for i in range(100):
-        if i % 2 > 0:
+    for id in range(desktopW_list):
+        for _ in range(fake.pyint(min_value=1, max_value=3, step=1)):
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),
-                comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
+                comment=fake.sentence(nb_words=10, variable_nb_words=True),
                 mobilewallpapers_id=None,
-                desktopwallpapers_id=fake.pyint(min_value=0, max_value=len(desktopW_list), step=1),
+                desktopwallpapers_id=id+1,
                 user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
-                )
-        elif i % 2 == 0:
+            )
+            comment_list.append(c)
+
+    for id in range(mobileW_list):
+        for _ in range(fake.pyint(min_value=1, max_value=3, step=1)):
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),
-                comment=fake.sentence(nb_words=10, variable_nb_words=True, ),
-                mobilewallpapers_id=fake.pyint(min_value=0, max_value=len(mobileW_list), step=1),
+                comment=fake.sentence(nb_words=10, variable_nb_words=True),
+                mobilewallpapers_id=id+1,
                 desktopwallpapers_id=None,
                 user_id=fake.pyint(min_value=1, max_value=len(users_list), step=1)
-                )
-            
-
-        comment_list.append(c)
-
-
-    db.session.add_all(comment_list)
-
+            )
+            comment_list.append(c)
 
     db.session.commit()
     print("Database seed complete - now it's entirely up to you!")

@@ -2,18 +2,20 @@ import { useContext } from "react";
 import { Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 
-import { CurrPaperContext, MobileWallContext } from "../AppContext";
+import { CommentContext, CurrPaperContext, MobileWallContext } from "../AppContext";
 import SubmitButton from "./SubmitButton"
 import "./MobileOverlay.css";
 
 function MobileOverlay() {
-    const { mobileWallState } = useContext(MobileWallContext);
+    const { commentState } = useContext(CommentContext);
     const { setCurrPaperState } = useContext(CurrPaperContext);
+    const { mobileWallState } = useContext(MobileWallContext);
     let { id } = useParams();
     id = parseInt(id)
 
     const foundPaper = mobileWallState.find(paper => paper.id === id)
-    const commentArr = foundPaper?.users.commentByUser
+    // const commentArr = foundPaper?.users.commentByUser
+    const commentArr = commentState.filter(comment => comment.mobilewallpapers_id === id)
 
     function handleCurrPaper(){
         setCurrPaperState(foundPaper)
@@ -52,7 +54,7 @@ function MobileOverlay() {
                                     <li>{com.comment}--{com.name}</li>
                                     <li>_______________________________________________</li>
                                 </Typography>))) :
-                            null }
+                                null }
                         </ul>
                         <NavLink
                             className = "commentLink"

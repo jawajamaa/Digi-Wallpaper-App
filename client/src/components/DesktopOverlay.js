@@ -1,19 +1,20 @@
 import { useContext } from "react";
-import { CurrPaperContext, DesktopWallContext } from "../AppContext";
-
 import { Grid, Rating, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
+
+import { CommentContext, CurrPaperContext, DesktopWallContext } from "../AppContext";
 import SubmitButton from "./SubmitButton"
 import "./DesktopOverlay.css";
 
 function DesktopOverlay() {
-    const { desktopWallState } = useContext(DesktopWallContext);
+    const { commentState } = useContext(CommentContext);
     const { setCurrPaperState } = useContext(CurrPaperContext);
+    const { desktopWallState } = useContext(DesktopWallContext);
     let { id } = useParams();
     id = parseInt(id)
 
     const foundPaper = desktopWallState.find(paper => paper.id === id)
-    const commentArr = foundPaper.users.commentByUser
+    const commentArr = commentState.filter(comment => comment.desktopwallpapers_id === id)
 
     function handleCurrPaper(){
         setCurrPaperState(foundPaper)
@@ -52,7 +53,7 @@ function DesktopOverlay() {
                             <SubmitButton type = "button" onClick = { handleCurrPaper }label = "Add your thoughts..."/>
                         </NavLink>
                     </Grid>
-                    <Grid item xs="auto">
+                    <Grid item xs={12}>
                         <div className="typography">
                             <Typography>
                                 <h4>{ foundPaper.title }</h4>

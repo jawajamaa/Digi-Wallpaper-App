@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { ErrorMessage, Field, useFormik } from "formik";
+import { ErrorMessage, Form, Field, useFormik } from "formik";
 import * as Yup from "yup";
-import { Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
+import { Formik } from 'formik';
 
 import { RefreshContext, ServerRoutesContext } from "../AppContext";
 
@@ -59,10 +60,14 @@ function AddWallpaper() {
     });
 
     return(
-        <div>
+        <Formik>
             <h2> Wallpaper Additions go here!</h2>
-            <form onSubmit={formik.handleSubmit} style={{ margin: '30px'}}>
+            <Form>
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
 
+                    </Grid>
+                </Grid>
                 <label htmlFor="title">Image Title</label>
                 <br />
                 <input 
@@ -142,8 +147,8 @@ function AddWallpaper() {
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
                 <SubmitButton />
-            </form>
-        </div>
+            </Form>
+        </Formik>
     );
 }
 

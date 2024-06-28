@@ -7,15 +7,10 @@ import { RefreshContext, ServerRoutesContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
 function AddMobilePaper() {
-    // const { mobileWallState, setMobileWallState } = useContext(MobileWallContext);
-    // const { desktopWallState, setDesktopWallState } = useContext(DesktopWallContext);
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
-    const {baseUrl,
-        mobileRoute
-        } = serverRoutesState
-
+    const { baseUrl, mobileRoute } = serverRoutesState
 
     const formSchema = Yup.object().shape({
         title: Yup.string("Invalid title")
@@ -31,6 +26,7 @@ function AddMobilePaper() {
         url: Yup.string()
             .url("Image url must be string")
             .required("Image must have a url or a path from which to be loaded"),
+        horizontal: Yup.boolean(),
         username: Yup.string()
             .min(8, "Username must be at least 8 characters")      
     });
@@ -103,6 +99,18 @@ function AddMobilePaper() {
                     value={formik.values.url}
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
+
+                <label htmlfor="horizontal"> Is this Image Horizontal? </label>
+                <br />
+                <input
+                    id="horizontal"
+                    name="horizontal"
+                    type="checkbox"
+                    value="false"
+                    onChange={formik.handleChange}
+                    checked={formik.values.horizontal ? "checked" : ""}
+                />
+                <p style={{ color:'red'}}> {formik.errors.horizontal} </p>
 
                 <label htmlfor="username"> Username </label>
                 <br />

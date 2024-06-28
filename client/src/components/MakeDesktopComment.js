@@ -101,8 +101,6 @@ function MakeDesktopComment() {
         validationSchema: Yup.object().shape(schemaFields),
         onSubmit: (values) => {
             let foundUser = userState.find(p => p.username === values.username)
-            console.log(values)
-            console.log(foundUser.name)
             if (currPaperState.horizontal) {
                 values.desktopwallpapers_id = currPaperState.id
                 values.name = foundUser.name
@@ -157,7 +155,8 @@ function MakeDesktopComment() {
                         />
                         <p style={{ color:'red'}}> {formik.errors.username} </p>
                         <div style={{display: (userLookup.found) ? "" : "none"}}>
-                            <label htmlFor="rating">rating</label>
+                           
+                            <label htmlFor="rating">Rating (Enter a number between 0 and 5)</label>
                             <br />
                             <input 
                                 id="rating"
@@ -178,6 +177,7 @@ function MakeDesktopComment() {
                         <p style={{ color:'red'}}> {formik.errors.comment} </p>
                     </div>
                     {userLookup.searched && !userLookup.found ? <p style={{ color:'red'}}>Username Not found!</p> : null}
+                    {userLookup.searched && userLookup.found ? <p style={{ color:'green'}}>User Found!</p> : null}
                     <SubmitButton label={userLookup.found ? "Post" : "Search"} />
                     {comSubmitted ? <p style={{ color:'green'}}>Comment posted successfully!</p> : null}
                 </form>

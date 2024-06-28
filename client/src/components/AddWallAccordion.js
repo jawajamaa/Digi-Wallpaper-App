@@ -64,8 +64,8 @@ export default function CustomizedAccordions() {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <AddWallpaper />
-            {/* <AddMobilePaper /> */}
+            {/* <AddWallpaper /> */}
+            <AddMobilePaper />
           </Typography>
         </AccordionDetails>
       </Accordion>

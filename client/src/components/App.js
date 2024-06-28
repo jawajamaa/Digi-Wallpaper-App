@@ -40,6 +40,7 @@ function App() {
   }, [refreshState])
 
   console.log(commentState)
+  console.log(refreshState)
 
   // fetch DesktopWallpapers (horizontal)
   useEffect(() => {
@@ -50,7 +51,6 @@ function App() {
       });
   }, [refreshState])
 
-  console.log(desktopWallState)
 
   // fetch MobileWallpapers (vertical)
   useEffect(() => {
@@ -61,7 +61,6 @@ function App() {
       });
   }, [refreshState])
   
-  console.log(mobileWallState)
 
   // fetch Users
     useEffect(() => {
@@ -71,8 +70,6 @@ function App() {
           setUserState(data)
         });
     }, [refreshState])
-  
-    console.log(userState)
 
 
   const toggleDarkTheme = () => {
