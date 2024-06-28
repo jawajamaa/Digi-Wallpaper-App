@@ -38,16 +38,31 @@ class MobilePapers(Resource):
     def post(self):
 
         lookUpUser = request.get_json().get("username")
-        user = User.query.filter_by(username=lookUpUser).first()
-        new_paper = MobileWallpaper(
-            title=request.get_json().get("title"),
-            year=request.get_json().get("year"),
-            location=request.get_json().get("location"),
-            path=request.get_json().get("url"),
-            horizontal=request.get_json().get("horizontal"),
-            user_id = user.id
-        )
-        
+        try:
+            user = User.query.filter_by(username=lookUpUser).first()
+            horizBool = request.get_json().get("horizontal")
+            if not horizBool:
+                new_paper = MobileWallpaper(
+                    title=request.get_json().get("title"),
+                    year=request.get_json().get("year"),
+                    location=request.get_json().get("location"),
+                    path=request.get_json().get("url"),
+                    horizontal=0,
+                    user_id = user.id
+                )
+            elif horizBool:
+                new_paper = MobileWallpaper(
+                    title=request.get_json().get("title"),
+                    year=request.get_json().get("year"),
+                    location=request.get_json().get("location"),
+                    path=request.get_json().get("url"),
+                    horizontal=1,
+                    user_id = user.id
+                )
+        except:
+            if not user:
+                raise Exception("User not found check spelling and try username again")
+            
         db.session.add(new_paper)
         db.session.commit()
 

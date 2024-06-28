@@ -525,8 +525,8 @@ def seed_data():
     print("Coming up with comments to add...")
     comment_list = []
 
-    for id in range(desktopW_list):
-        for _ in range(fake.pyint(min_value=1, max_value=3, step=1)):
+    for id in range(len(desktopW_list)):
+        for i in range(fake.pyint(min_value=1, max_value=3, step=1)):
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),
@@ -537,8 +537,8 @@ def seed_data():
             )
             comment_list.append(c)
 
-    for id in range(mobileW_list):
-        for _ in range(fake.pyint(min_value=1, max_value=3, step=1)):
+    for id in range(len(mobileW_list)):
+        for i in range(fake.pyint(min_value=1, max_value=3, step=1)):
             c = Comment(
                 name=fake.name().title(),
                 rating=fake.pyint(min_value=0, max_value=5, step=1),

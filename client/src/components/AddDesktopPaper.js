@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -7,6 +7,7 @@ import { RefreshContext, ServerRoutesContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
 function AddDesktopPaper() {
+    const [ addPaper, setAddPaper] = useState({"sent": false, "accepted": null});
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
@@ -49,8 +50,11 @@ function AddDesktopPaper() {
                 },
                 body: JSON.stringify(values),
             }).then(r => {
-                if (r.status === 200) {
+                if (r.status === 201) {
                     setRefreshState(!refreshState); 
+                    setAddPaper({"sent": true, "accepted": true});
+                } else if (r.status === 500) {
+                    setAddPaper({"sent": true, "accepted": false});
                 }
             });
         },
@@ -124,6 +128,8 @@ function AddDesktopPaper() {
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
                 <SubmitButton />
+                {addPaper.sent && addPaper.accepted ? <p style={{ color:'green'}}>Wallpaper posted successfully!</p> : null}
+                {addPaper.sent && !addPaper.accepted ? <p style={{ color:'red'}}>Wallpaper not posted - Please check Username and try again</p> : null}
             </form>
         </div>
     );

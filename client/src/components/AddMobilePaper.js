@@ -51,9 +51,11 @@ function AddMobilePaper() {
                 },
                 body: JSON.stringify(values),
             }).then(r => {
-                if (r.status === 200) {
+                if (r.status === 201) {
                     setRefreshState(!refreshState); 
                     setAddPaper({"sent": true, "accepted": true});
+                } else if (r.status === 500) {
+                    setAddPaper({"sent": true, "accepted": false});
                 }
             });
         },
@@ -112,7 +114,7 @@ function AddMobilePaper() {
                     type="checkbox"
                     value="false"
                     onChange={formik.handleChange}
-                    checked={!formik.values.horizontal ? "checked" : ""}
+                    checked={formik.values.horizontal ? "checked" : ""}
                 />
                 <p style={{ color:'red'}}> {formik.errors.horizontal} </p>
 
@@ -128,7 +130,7 @@ function AddMobilePaper() {
 
                 <SubmitButton />
                 {addPaper.sent && addPaper.accepted ? <p style={{ color:'green'}}>Wallpaper posted successfully!</p> : null}
-                {addPaper.sent && !addPaper.accepted ? <p style={{ color:'red'}}>Wallpaper not posted...</p> : null}
+                {addPaper.sent && !addPaper.accepted ? <p style={{ color:'red'}}>Wallpaper not posted - Please check Username and try again</p> : null}
             </form>
         </div>
     );
