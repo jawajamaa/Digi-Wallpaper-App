@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -7,10 +7,13 @@ import { RefreshContext, ServerRoutesContext } from "../AppContext";
 import SubmitButton from "./SubmitButton";
 
 function AddMobilePaper() {
+    const [ addPaper, setAddPaper] = useState({"sent": false, "accepted": null});
     const { serverRoutesState } = useContext(ServerRoutesContext);
     const { refreshState, setRefreshState } = useContext(RefreshContext);
 
     const { baseUrl, mobileRoute } = serverRoutesState
+
+    console.log(addPaper.sent, addPaper.accepted)
 
     const formSchema = Yup.object().shape({
         title: Yup.string("Invalid title")
@@ -50,11 +53,12 @@ function AddMobilePaper() {
             }).then(r => {
                 if (r.status === 200) {
                     setRefreshState(!refreshState); 
+                    setAddPaper({"sent": true, "accepted": true});
                 }
             });
         },
     });
-
+    console.log(addPaper.sent, addPaper.accepted)
     return(
         <div>
             <h2>Mobile (Vertical) Wallpaper additions go here!</h2>
@@ -100,7 +104,7 @@ function AddMobilePaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
 
-                <label htmlfor="horizontal"> Is this Image Horizontal? </label>
+                <label htmlfor="horizontal">Check box if Image is Horizontal</label>
                 <br />
                 <input
                     id="horizontal"
@@ -108,7 +112,7 @@ function AddMobilePaper() {
                     type="checkbox"
                     value="false"
                     onChange={formik.handleChange}
-                    checked={formik.values.horizontal ? "checked" : ""}
+                    checked={!formik.values.horizontal ? "checked" : ""}
                 />
                 <p style={{ color:'red'}}> {formik.errors.horizontal} </p>
 
@@ -123,6 +127,8 @@ function AddMobilePaper() {
                 <p style={{ color:'red'}}> {formik.errors.username} </p>
 
                 <SubmitButton />
+                {addPaper.sent && addPaper.accepted ? <p style={{ color:'green'}}>Wallpaper posted successfully!</p> : null}
+                {addPaper.sent && !addPaper.accepted ? <p style={{ color:'red'}}>Wallpaper not posted...</p> : null}
             </form>
         </div>
     );

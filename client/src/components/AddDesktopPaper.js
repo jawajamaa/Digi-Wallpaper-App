@@ -101,7 +101,7 @@ function AddDesktopPaper() {
                 />
                 <p style={{ color:'red'}}> {formik.errors.url} </p>
 
-                <label htmlfor="horizontal"> Is this Image Horizontal? </label>
+                <label htmlfor="horizontal"> Check box if Image is Horizontal </label>
                 <br />
                 <input
                     id="horizontal"
