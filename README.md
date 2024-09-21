@@ -5,14 +5,15 @@
 Mobile Wallpaper - vertical
 Desktop Wallpaper - horizontal
 Users (who submitted wallpaper)
+Comments (with ratings by users)
 
-### Styling
-used MUI (Material UI) for styling and Dark Mode application, which I like, so I have as the default.  
+## Construction and Use
 
-The site displays both the Mobile and Desktop wallpaper, and a user can submit their own wallpaper to be included in the galleries.  To be added when I build on this more for the final project, is another model, Comments where users can make short comments am planning to incorporate ratings as MUI had those icons available as well, which was part of the choice to use MUI, but also just to use something new.
+This app has a React.js front-end styled with MUI (Material UI) making use of Formik for the controlled forms assisted by Yup for validations.  This built on a Python back-end utilizing Flask to run the server and SQLAlchemy as the ORM.  
 
-#### CRUD actions
+Everything here uses a username, and on the back-end it translates the username to the User's id, as the User does not need to know what id the database assigned to them.  This so there is already some modicum of privacy as a User would have to guess what another Username might be in order to search for it.  
+<!-- The app has routes for both Mobile and Desktop wallpaper, and a User can submit their own wallpaper to be included in the galleries, however in order to do that, a User needs to create a User in the database first.  The fourth model is Comments, where users can make short comments about the individual wallpapers, and if one selects any of the wallpapers from their respective gallery, they can see that specific image larger and on its own with any image information and related comments. In addition, there is also a rating by the user that posted the comment, utilizing the star rating icons available from MUI. -->
 
-CR available on both Mobile and Desktop models, and full CRUD on Users.  I used the accordion from MUI to make both visual models available under the same route, and since MUI also has a dropdown or option menu, may try to combine the two with an option to choose which kind of image is being submitted.
 
-For Users, the full CRUD is available, as one can add a user, then under the Search and Update accordion option, first Search a username for the Read.  Note - everything is done by the username, but the id is found and used on the backend, as the User would not know, nor need to know their id and usernames are not displayed on purpose for privacy's sake, but can be searched if one knows the username to search. Then, when found, the Name and email can be updated, and finally, if one wishes to no longer be part of this community, can delete their User from the database.
+### Images
+All Images © 2005 - 2024 tim ryon

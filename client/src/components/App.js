@@ -39,8 +39,8 @@ function App() {
       });
   }, [refreshState])
 
-  console.log(commentState)
-  console.log(refreshState)
+  // console.log(commentState)
+  // console.log(refreshState)
 
   // fetch DesktopWallpapers (horizontal)
   useEffect(() => {

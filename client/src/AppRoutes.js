@@ -1,13 +1,13 @@
+import AddWallAccordion from "./components/AddWallAccordion";
 import App from "./components/App";
-import Home from "./components/Home";
-import ErrorPage from "./components/ErrorPage";
 import DesktopOverlay from "./components/DesktopOverlay";
 import DesktopWall from "./components/DesktopWall";
+import ErrorPage from "./components/ErrorPage";
+import Home from "./components/Home";
 import MakeDesktopComment from "./components/MakeDesktopComment";
 import MakeMobileComment from "./components/MakeMobileComment";
 import MobileOverlay from "./components/MobileOverlay";
 import MobileWall from "./components/MobileWall";
-import AddWallAccordion from "./components/AddWallAccordion";
 import UserAccordion from "./components/UserAccordion";
 
 
