@@ -91,7 +91,10 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Container>
+      <Container 
+        maxWidth="false"
+        disableGutters="true"
+      >
         <header>
            <ResponsiveAppBar 
               toggleDarkMode = { toggleDarkMode }

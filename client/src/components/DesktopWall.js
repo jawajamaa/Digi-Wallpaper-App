@@ -11,7 +11,7 @@ function DesktopWall() {
 
     return(
         <div className = "DesktopWall">
-            <Box sx={{ ml: 10, width: 1000, height: 750 }}>
+            <Box sx={{ ml: 10, width: 1500, height: 750 }}>
                 <ImageList variant="masonry" cols={4} gap={8}>
                     {
                         desktopWallState?.map(desktoppaper => (

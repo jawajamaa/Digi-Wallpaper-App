@@ -19,7 +19,7 @@ function Home(){
 
 
     return(
-        <Container disableGutters fixed={false} maxWidth="xl">
+        <Container>
             {randomWallState && (
                 <img
                     src = {randomWallState.path}
