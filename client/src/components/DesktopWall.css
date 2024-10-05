@@ -1,0 +1,9 @@
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/*  for Firefox only */
+
+.DesktopWall {
+    scrollbar-width: none;
+}

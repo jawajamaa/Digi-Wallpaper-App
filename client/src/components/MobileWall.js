@@ -3,6 +3,7 @@ import { useContext } from "react";
 
 import { MobileWallContext } from "../AppContext";
 import Card from "./Card";
+import "./MobileWall.css";
 
 function MobileWall() {
     const { mobileWallState } = useContext(MobileWallContext);
@@ -10,7 +11,7 @@ function MobileWall() {
 
     return(
         <div className = "MobileWall">
-            <Box sx={{ ml: 10, width: 1000, height: 750, overflowY: 'scroll' }}>
+            <Box sx={{ ml: 10, width: 1000, height: 750 }}>
                 <ImageList variant="masonry" cols={4} gap={8}>
                     {
                         mobileWallState?.map(mobilepaper => (
